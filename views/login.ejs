@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>login</title>
-    <link rel="stylesheet" href="/others/styles.css">
+    <link rel="stylesheet" href="/others/loginsignupstyles.css">
+    <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
 </head>
 
 <body>
@@ -37,10 +38,15 @@
         </form>
     </div>
 </body>
+
 </html>
 
 <script>
-    document.getElementById('signup-button').onclick=function(){
-        window.location.href='/signup'
+    document.getElementById('signup-button').onclick = function () {
+        window.location.href = '/signup'
+    }
+
+    document.getElementById('signin-button').onclick=function(){
+        window.location.href='/'
     }
 </script>
