@@ -1,23 +1,24 @@
 body {
     position: relative;
-    width: 1263px;
-    height: 642px;
     background: #FFFFFF;
     width: 980px;
     margin: auto;
     font-family: "JetBrains Mono";
 }
 
+
 .whole {
-    position: absolute;
-    width: 929.74px;
-    height: 1233.93px;
-    left: 1061.25px;
-    top: -191.57px;
+    position: fixed;
+    width: 1059.94px;
+    height: 1159.82px;
+    left: 350px;
+    top: -221.74px;
     background: linear-gradient(182.27deg, #1DF80A -75.6%, rgba(218, 255, 215, 0) 98.09%);
     border-radius: 232px;
-    transform: matrix(0.76, 0.65, -0.85, 0.52, 0, 0);
+    transform: matrix(0.98, 0.21, -0.5, 0.87, 0, 0);
+    z-index: -1;
 }
+
 
 .logo-img {
     width: 181px;
