@@ -94,6 +94,7 @@ nav a:active::after {
     border-radius: 40px;
     padding: 0px;
     margin: 0;
+    
 }
 
 .section-heading {
@@ -127,6 +128,8 @@ nav a:active::after {
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
+    width: 80%;
+    margin: auto;
 
 }
 
@@ -138,6 +141,10 @@ nav a:active::after {
     display: flex;
     justify-content: space-evenly;
     padding-top: 30px;
+    flex-wrap: wrap;
+    min-height: 240px;
+
+    
 }
 
 .section-head {
@@ -148,6 +155,13 @@ nav a:active::after {
     padding-left: 15px;
     padding-right: 15px;
     transition: box-shadow 0.5s ease;
+    clear: both;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 85px ;
+    
 }
 
 .section-head:hover {
@@ -172,6 +186,7 @@ nav a:active::after {
     text-align: center;
     margin: 0;
     padding: 0;
+    
 }
 
 .section-label {
@@ -200,12 +215,11 @@ nav a:active::after {
     margin-top: 0;
 }
 
-.section-foot {
-    margin-top: 20px;
-    margin-right: 12px;
+.section-button {
     float: right;
     position: relative;
-    top: 28%
+    margin-bottom: 18px;
+    margin-right: 10px;
 }
 
 .round-button {

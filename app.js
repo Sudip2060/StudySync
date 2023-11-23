@@ -21,9 +21,9 @@ mongoose.connect(process.env.CONNECTION_URL).then(() => {
 app.get('/login', (req, res) => { res.render('login') })
 app.get('/signup', (req, res) => { res.render('signup') })
 app.get('/', (req, res) => { res.render('home') })
-app.get('/sections',(req,res)=>{
-    res.render('sections')
-})
+
+app.get('/sections', (req, res) => { res.render('section') })
+app.get('/assignments', (req, res) => { res.render('assignment') })
 
 app.use(authroute)
 

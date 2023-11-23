@@ -223,3 +223,12 @@ Sign up page
     margin-top: 40px;
 
 }
+
+footer {
+    font-weight: 400;
+    font-size: 12px;
+    align-items: center;
+    text-align: center;
+    font-size: x-small;
+    margin-top: 40px;
+}

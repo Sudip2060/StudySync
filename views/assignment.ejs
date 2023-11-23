@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
+    <title>Sections</title>
+    <link rel="stylesheet" href="/others/style4.css">
+</head>
+
+<body>
+    <%- include('partials/top'); %>
+        <div class="back-link">
+            <a href="/sections">back to sections</a>
+        </div>
+        <div class="main">
+            <div class="left">
+                <div class="left-heading">
+                    <P>Database Section-5</P>
+                </div>
+                <div class="left-main">
+                    <div class="assignment-container">
+                        <input type="checkbox" id="assignmentcheck">
+                        <div class="assignment-box">
+                            <div class="box-left">
+                                <P id="assignmenttitle">Assignment 1</P>
+                            </div>
+                            <div class="box-right">
+                                <div class="startdate-div">
+                                    <P>Start Date: 2023-04-21</P>
+                                </div>
+                                <div class=enddate-div>
+                                    <P>End Date: 2023-04-21</P>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="assignment-container">
+                        <input type="checkbox" id="assignmentcheck">
+                        <div class="assignment-box">
+                            <div class="box-left">
+                                <P id="assignmenttitle">Assignment 1</P>
+                            </div>
+                            <div class="box-right">
+                                <div class="startdate-div">
+                                    <P>Start Date: 2023-04-21</P>
+                                </div>
+                                <div class=enddate-div>
+                                    <P>End Date: 2023-04-21</P>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="assignment-container">
+                        <input type="checkbox" id="assignmentcheck">
+                        <div class="assignment-box">
+                            <div class="box-left">
+                                <P id="assignmenttitle">Assignment 1</P>
+                            </div>
+                            <div class="box-right">
+                                <div class="startdate-div">
+                                    <P>Start Date: 2023-04-21</P>
+                                </div>
+                                <div class=enddate-div>
+                                    <P>End Date: 2023-04-21</P>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="assignment-container">
+                        <input type="checkbox" id="assignmentcheck">
+                        <div class="assignment-box">
+                            <div class="box-left">
+                                <P id="assignmenttitle">Assignment 1</P>
+                            </div>
+                            <div class="box-right">
+                                <div class="startdate-div">
+                                    <P>Start Date: 2023-04-21</P>
+                                </div>
+                                <div class=enddate-div>
+                                    <P>End Date: 2023-04-21</P>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right">
+                <div class="right-main">
+                    <div class="right-header">
+                        <P>Preview</P>
+                    </div>
+                    <div class="right-bodycontainer">
+                        <P>Nothing to preview</P>
+                    </div>
+
+                </div>
+                <div class="right-foot">
+                    <div class="createbutton-holder">
+                        <button id="createbutton">Create</button>
+                    </div>
+                    <div class="editbutton-holder">
+                        <button id="editbutton">Edit</button>
+                    </div>
+                    <div class="deletebutton-holder">
+                        <button id="deletebutton">Delete</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="overlay" id="overlay">
+            <div class="overlay-holder">
+                <div class="overlayclosebuttoncontainer">
+                    <button class="close-btn" onclick="hideOverlay()">X</button>
+                </div>
+                <div class="overlay_container">
+                    <div class="overlay-header">
+                        <div class="overlay_heading">
+                            <p>Add an Assignment</p>
+                        </div>
+                        <div class="section-emogi-container">
+                            <img src="/images/sub-section.png">
+                        </div>
+                    </div>
+                    <div class="overlay-form">
+                        <form>
+                            <div class="form-left">
+                                <div class="overlay-form-row">
+                                    <div class="overlay-Sectionname">
+                                        <div class="form-label">
+                                            <label for="sectionname">Assignment name</label>
+                                        </div>
+                                        <div class="form-input">
+                                            <input type="text" id="sectionname">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="overlay-form-row">
+                                    <div class="overlay-startdate">
+                                        <div class="form-label">
+                                            <label for="startdate">Start date</label>
+                                        </div>
+                                        <div class="form-input">
+                                            <input type="date" id="startdate">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="overlay-form-row">
+                                    <div class="overlay-enddate">
+                                        <div class="form-label">
+                                            <label for="enddate">End date</label>
+                                        </div>
+                                        <div class="form-input">
+                                            <input type="date" id="enddate">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-right">
+                                <div class="overlay-form-row">
+                                    <div class="overlay-Instructions">
+                                        <div class="form-label">
+                                            <label for="instructions">Instructions</label>
+                                        </div>
+                                        <div class="form-input-instructions">
+                                            <textarea id="instructions" rows="15" cols="60"
+                                                placeholder="enter your message here "></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="overlay-submit">
+                            <button type="button" id="create-button">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+        <%- include('partials/foot'); %>
+    
+    <script>
+        document.getElementById('createbutton').onclick = function showOverlay() {
+            document.getElementById("overlay").style.display = "block";
+        }
+        function hideOverlay() {
+            document.getElementById("overlay").style.display = "none";
+        }
+    </script>
+
+
+        
+
+    
