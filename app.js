@@ -5,7 +5,11 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 app.set('view engine', 'ejs');
 app.use(express.static('public'))
-const authroute = require('./routes/controller')
+const usercontroller = require('./routes/controller')
+const routes = require('./routes/routeshandler')
+const assignmentcontroller = require('./routes/assignmentcontroller')
+
+
 
 app.use(express.json())
 
@@ -17,15 +21,9 @@ mongoose.connect(process.env.CONNECTION_URL).then(() => {
     console.log(err)
 })
 
-//routes for the application
-app.get('/login', (req, res) => { res.render('login') })
-app.get('/signup', (req, res) => { res.render('signup') })
-app.get('/', (req, res) => { res.render('home') })
-
-app.get('/sections', (req, res) => { res.render('section') })
-app.get('/assignments', (req, res) => { res.render('assignment') })
-
-app.use(authroute)
+app.use(routes)
+app.use(usercontroller)
+app.use(assignmentcontroller)
 
 
 

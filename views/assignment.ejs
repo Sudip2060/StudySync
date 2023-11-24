@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
-    <title>Sections</title>
+    <title>Assignment</title>
     <link rel="stylesheet" href="/others/style4.css">
+    <script src="/functions/assignfunc.js" defer></script>
+    <script src="/functions/testfile.js" defer></script>
 </head>
 
 <body>
@@ -20,81 +22,20 @@
                     <P>Database Section-5</P>
                 </div>
                 <div class="left-main">
-                    <div class="assignment-container">
-                        <input type="checkbox" id="assignmentcheck">
-                        <div class="assignment-box">
-                            <div class="box-left">
-                                <P id="assignmenttitle">Assignment 1</P>
-                            </div>
-                            <div class="box-right">
-                                <div class="startdate-div">
-                                    <P>Start Date: 2023-04-21</P>
-                                </div>
-                                <div class=enddate-div>
-                                    <P>End Date: 2023-04-21</P>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="assignment-container">
-                        <input type="checkbox" id="assignmentcheck">
-                        <div class="assignment-box">
-                            <div class="box-left">
-                                <P id="assignmenttitle">Assignment 1</P>
-                            </div>
-                            <div class="box-right">
-                                <div class="startdate-div">
-                                    <P>Start Date: 2023-04-21</P>
-                                </div>
-                                <div class=enddate-div>
-                                    <P>End Date: 2023-04-21</P>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="assignment-container">
-                        <input type="checkbox" id="assignmentcheck">
-                        <div class="assignment-box">
-                            <div class="box-left">
-                                <P id="assignmenttitle">Assignment 1</P>
-                            </div>
-                            <div class="box-right">
-                                <div class="startdate-div">
-                                    <P>Start Date: 2023-04-21</P>
-                                </div>
-                                <div class=enddate-div>
-                                    <P>End Date: 2023-04-21</P>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="assignment-container">
-                        <input type="checkbox" id="assignmentcheck">
-                        <div class="assignment-box">
-                            <div class="box-left">
-                                <P id="assignmenttitle">Assignment 1</P>
-                            </div>
-                            <div class="box-right">
-                                <div class="startdate-div">
-                                    <P>Start Date: 2023-04-21</P>
-                                </div>
-                                <div class=enddate-div>
-                                    <P>End Date: 2023-04-21</P>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="right">
                 <div class="right-main">
                     <div class="right-header">
-                        <P>Preview</P>
+                        <P class="preview-head">Preview</P>
+                        
                     </div>
                     <div class="right-bodycontainer">
-                        <P>Nothing to preview</P>
+                        <p id="rightbodypart">
+                            
+                        </p>
+                        
                     </div>
-
                 </div>
                 <div class="right-foot">
                     <div class="createbutton-holder">
@@ -106,7 +47,6 @@
                     <div class="deletebutton-holder">
                         <button id="deletebutton">Delete</button>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -172,26 +112,19 @@
                                 </div>
                             </div>
                         </form>
+                        <div class="message-box">
+                        </div>
                         <div class="overlay-submit">
-                            <button type="button" id="create-button">Add</button>
+                            <button type="button" id="assignmentaddbutton">Add</button>
                         </div>
                     </div>
                 </div>
             </div>
-    
+
+        </div>
+
+        <div class="test_div">
+            <p class="test_para"></p>
+
         </div>
         <%- include('partials/foot'); %>
-    
-    <script>
-        document.getElementById('createbutton').onclick = function showOverlay() {
-            document.getElementById("overlay").style.display = "block";
-        }
-        function hideOverlay() {
-            document.getElementById("overlay").style.display = "none";
-        }
-    </script>
-
-
-        
-
-    

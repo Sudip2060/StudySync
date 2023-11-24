@@ -120,6 +120,7 @@ nav a:active::after,
     padding-bottom: 20px;
 }
 
+
 .left-heading {
     font-family: 'JetBrains Mono';
     font-style: normal;
@@ -147,7 +148,13 @@ nav a:active::after,
     background-color: #D9D9D9;
     border-radius: 30px;
     margin: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+
 }
+
+
+
 
 .assignment-container {
     padding-top: 15px;
@@ -234,7 +241,7 @@ nav a:active::after,
     line-height: 29px;
     align-items: center;
     text-align: center;
-    margin: 0;
+    margin-top: 0;
     color: rgb(73, 95, 84)
 }
 
@@ -244,18 +251,19 @@ nav a:active::after,
 }
 
 .right-bodycontainer {
-    padding-top: 50px;
+    margin: auto;
     font-family: 'JetBrains Mono';
     font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 26px;
+    font-weight: bold;
+    font-size: 10px;
     align-items: center;
     text-align: center;
     margin: auto;
     width: 100%;
     color: rgba(0, 0, 0, 0.6);
 }
+
+
 
 .right-foot {
     display: flex;
@@ -451,12 +459,11 @@ nav a:active::after,
 
 }
 .overlay-submit {
-    margin-top: 30px;
     margin-bottom: 20px;
     text-align: center;
 }
 
-#create-button {
+#assignmentaddbutton{
     padding: 10px 15px;
     background-color: #096A2E;
     color: white;
@@ -471,7 +478,10 @@ nav a:active::after,
     font-weight: bold;
 }
 
-#create-button:hover {
+.message-box{
+    font-size: 14px;
+}
+#assignmentaddbutton:hover {
     background-color: #0b7b36;
 }
 

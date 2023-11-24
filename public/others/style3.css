@@ -143,8 +143,6 @@ nav a:active::after {
     padding-top: 30px;
     flex-wrap: wrap;
     min-height: 240px;
-
-    
 }
 
 .section-head {
