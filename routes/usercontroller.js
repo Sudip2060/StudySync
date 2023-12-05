@@ -1,17 +1,35 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../models/schema')
+const { createtoken } = require('../Necessities/utilities')
+require('dotenv').config()
 
 
 router.post('/signup', async (req, res) => {
     try {
         const { firstname, lastname, dateofbirth, institution, phonenumber, postalcode, email, password } = req.body
         const user = await User.create({ firstname, lastname, dateofbirth, institution, phonenumber, postalcode, email, password })
+        const token = createtoken(user._id)
+        res.cookie('jwt', token, { httpOnly: true, maxAge: 60 * 60 * 1000 })
         res.status(200).json({ user })
     }
     catch (err) {
         res.status(500).json("Error")
         console.log(err.message)
+    }
+})
+
+
+router.post('/login', async (req, res) => {
+    try {
+        const { email, password } = req.body
+        const user = await User.login(email, password)
+        const token = createtoken(user._id)
+        res.cookie('jwt', token, { httpOnly: true, maxAge: 60 * 60 * 1000 })
+        res.status(201).json({ message: 'login Successful ', token })
+    }
+    catch (err) {
+        res.status(404  ).send(err.message)
     }
 })
 

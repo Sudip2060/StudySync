@@ -38,19 +38,25 @@ userschema.pre('save', async function (next) {
 })
 
 userschema.statics.login = async function (email, password) {
-    const user = await this.findone({ email });
-    if (user) {
-        const isAuth = await bcrypt.compare(password, user.password)
-        if (isAuth) {
-            return user;
+    try {
+        const user = await this.findOne({ email });
+        if (user) {
+            const isAuth = await bcrypt.compare(password, user.password)
+            if (isAuth) {
+                return user
+            }
+            else {
+                throw Error('Incorrect Password')
+            }
         }
         else {
-            throw Error('Incorrect Password')
+            throw Error('User not found')
         }
     }
-    else {
-        throw Error('Incorrect Email')
+    catch(error){
+        throw error;
     }
+    
 }
 
 const User = mongoose.model('user', userschema)

@@ -24,10 +24,10 @@
     <div class="login-form">
         <form>
             <div class="form-row">
-                <input type="text" class="username-box" placeholder="username">
+                <input type="email" class="username-box" placeholder="username">
             </div>
             <div class="form-row">
-                <input type="text" class="password-box" placeholder="password">
+                <input type="password" class="password-box" placeholder="password">
             </div>
             <div class="form-row">
                 <button type="button" id="signin-button">Sign in</button>
@@ -36,6 +36,9 @@
                 <P class="rstpwd">reset password</P>
             </div>
         </form>
+    </div>
+    <div class="login-error">
+
     </div>
     <footer>
         <P>Copyright &copy; 2023 StudySync. All rights reserved.</P>
@@ -49,7 +52,47 @@
         window.location.href = '/signup'
     }
 
-    document.getElementById('signin-button').onclick=function(){
-        window.location.href='/'
+
+    document.getElementById('signin-button').onclick = async () => {
+        try {
+            const email = document.querySelector('.username-box').value
+            const password = document.querySelector('.password-box').value
+
+            if (!email || !password) {
+                document.querySelector('.login-error').textContent = 'Both username and password are required!';
+                return;
+            }
+
+            function isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+
+            if (!isValidEmail(email)) {
+                document.querySelector('.login-error').textContent = 'Please enter a valid email address.';
+                return;
+            }
+            const res = await fetch('/login', {
+                method: 'post',
+                body: JSON.stringify({ email, password }),
+                headers: { 'Content-type': 'application/json' }
+            }
+            )
+            if (res.ok) {
+                const data = await res.json()
+                console.log(data)
+                window.location.href = '/'
+            }
+            else if (res.status = 401){
+                document.querySelector('.login-error').textContent = 'User not found'
+            }
+
+        }
+        catch (err) {
+            console.log(err)
+        }
+
     }
+
+
 </script>
