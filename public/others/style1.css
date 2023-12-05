@@ -1,7 +1,7 @@
 body {
     width: 980px;
     margin: auto;
-    background-color: white;
+    background-color: #ffffff;
     font-family: 'JetBrains Mono';
     color: #096A2E;
     text-align: center;
@@ -17,7 +17,7 @@ body {
 #signup-submit-button {
     padding: 10px 15px;
     background-color: #096A2E;
-    color: white;
+    color: #ffffff;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -83,7 +83,7 @@ body {
     border-radius: 20px;
     height: 40px;
     width: 280px;
-    border: solid black 1px;
+    border: solid#000000 1px;
     outline: none;
     font-size: large;
 
@@ -140,14 +140,14 @@ Sign up page
 }
 
 .welcome-message {
-    color: black;
+    color: #000000;
     font-size: 44px;
     font-weight: 500;
     margin-left: 10px;
 }
 
 .CTA {
-    color: black;
+    color: #000000;
     font-weight: 700;
     font-size: 12px;
     margin-bottom: 0;
@@ -188,7 +188,7 @@ Sign up page
 
 .signup-head {
     margin-top: 90px;
-    color: black;
+    color: #000000;
 
 }
 
@@ -211,7 +211,7 @@ Sign up page
 .form-input input {
     margin-top: 4px;
     background-color: white;
-    border: solid black 1px;
+    border: solid #000000 1px;
     border-radius: 20px;
     width: 200px;
     height: 25px;

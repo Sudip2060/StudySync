@@ -1,5 +1,4 @@
 
-
 document.getElementById('createbutton').onclick = function showOverlay() {
     document.getElementById("overlay").style.display = "block";
     document.querySelector('.message-box').textContent = "";
@@ -61,18 +60,11 @@ async function postassignment() {
 
 }
 
-
-
-
 function addassignmentbar(assignmentname, sDate, edate) {
     const newAssignmentContainer = document.createElement('div');
     newAssignmentContainer.className = "assignment-container";
 
-    const newCheckbox = document.createElement('input')
-    newCheckbox.type = 'checkbox';
-    newCheckbox.id = 'assignmentcheck';
 
-    newAssignmentContainer.appendChild(newCheckbox);
 
     const newAssignmentBox = document.createElement('div');
     newAssignmentBox.className = 'assignment-box';
@@ -105,28 +97,83 @@ function addassignmentbar(assignmentname, sDate, edate) {
     document.querySelector('.left-main').appendChild(newAssignmentContainer);
 }
 
-document.querySelector('.left-main').addEventListener('click', function (event) {
-    if (event.target.classList.contains('assignment-box')) {
-        const assignmentName = event.target.querySelector('.box-left #assignmenttitle').textContent;
-        viewassignment(assignmentName);
-    }
-});
 
+document.querySelector('.left-main').addEventListener('click', function (event) {
+    const assignmentbar = event.target.closest('.assignment-box')
+    const assignmenttitle = assignmentbar.querySelector('#assignmenttitle').textContent
+    viewassignment(assignmenttitle)
+})
+
+
+function preview() {
+    let mainpreview = document.createElement('div')
+    mainpreview.setAttribute('class', 'right-bodycontainer')
+    let rightmain = document.querySelector('.right-main')
+    rightmain.appendChild(mainpreview)
+
+    let previewAssignmenthead = document.createElement('div')
+    previewAssignmenthead.setAttribute('class', 'previewAssignment-head')
+    mainpreview.appendChild(previewAssignmenthead)
+    
+    let previewassignmenttitle = document.createElement('p')
+    previewassignmenttitle.setAttribute('class', 'previewAssignmenttitle')
+    previewAssignmenthead.appendChild(previewassignmenttitle)
+
+    let datecontainer = document.createElement('div')
+    datecontainer.setAttribute('class', 'previewAssignment-date')
+    mainpreview.appendChild(datecontainer)
+
+    let startdate = document.createElement('p')
+    startdate.setAttribute('class', 'PreviewAssignmentstartdate')
+    datecontainer.appendChild(startdate)
+
+    let enddate = document.createElement('p')
+    enddate.setAttribute('class', 'PreviewAssignmentenddate')
+    datecontainer.appendChild(enddate)
+
+    let instructionscontainer = document.createElement('div')
+    instructionscontainer.setAttribute('class', 'previewAssignmentinstrutions')
+    mainpreview.appendChild(instructionscontainer)
+
+    let instructionshead = document.createElement('p')
+    instructionshead.setAttribute('class', 'Assignmentinstrutiontitle')
+
+    let instructionsBody = document.createElement('p')
+    instructionsBody.setAttribute('class', 'instructionsBody')
+    
+    instructionscontainer.appendChild(instructionshead)
+    instructionscontainer.appendChild(instructionsBody)
+}
 
 async function viewassignment(assignmentname) {
-    document.querySelector('.right-bodycontainer').textContent = ''
     try {
         const res = await fetch('/assignments/name?name=' + assignmentname, {
             method: "get",
             headers: {
                 'Content-type': 'application/json'
             }
-
         })
         if (res.ok) {
+            previewmessagebox = document.querySelector('.emptypreviewmessage')
+            if(previewmessagebox){
+                document.querySelector('.right-header').removeChild(previewmessagebox)
+            }
+            
+            preview()
             const data = await res.json()
-            console.log(data)
-            document.querySelector('.test_div').textContent = JSON.stringify(data)
+            document.querySelector('.previewAssignmenttitle').textContent = data.assignment.assignmentname
+
+            const Startdate = new Date(data.assignment.startdate)
+            const Enddate = new Date(data.assignment.enddate)
+
+            document.querySelector('.PreviewAssignmentstartdate').textContent = 'Start Date: ' + dateformatter(Startdate)
+            document.querySelector('.PreviewAssignmentenddate').textContent = 'End Date: ' + dateformatter(Enddate)
+            document.querySelector('.instructionsBody').textContent = data.assignment.instructions
+
+            function dateformatter(date) {
+                let dateformat = { year: 'numeric', month: 'numeric', day: 'numeric' }
+                return date.toLocaleDateString('en-us', dateformat)
+            }
         }
         else {
             const error = await res.json()
@@ -147,7 +194,11 @@ async function viewassignment(assignmentname) {
 
 
 
-    
+
+
+
+
+
 
 
 
