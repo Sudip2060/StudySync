@@ -25,11 +25,45 @@ router.post('/login', async (req, res) => {
         const { email, password } = req.body
         const user = await User.login(email, password)
         const token = createtoken(user._id)
-        res.cookie('jwt', token, { httpOnly: true, maxAge: 60 * 60 * 1000 })
-        res.status(201).json({ message: 'login Successful ', token })
+        res.cookie('jwt', token, { httpOnly: true, maxAge: 2 * 60 * 1000 })
+        res.status(201).json({message:"login Successful"})
     }
     catch (err) {
-        res.status(404  ).send(err.message)
+        res.status(404).json(err.message)
+    }
+})
+
+router.post('/logout', async (req, res) => {
+    try {
+        const logoutstatus = res.clearCookie('jwt')
+        if (logoutstatus) {
+            res.status(200).json({ message: "logout Successful" })
+        }
+        else {
+            res.status(404).json({ message: "an error occured" })
+        }
+    }
+    catch (err) {
+        console.log(err)
+    }
+
+})
+
+
+router.post('/passwordchange', async (req, res) => {
+    try {
+        const { email, oldpassword, newpassword } = req.body;
+        const user = await User.updatepassword(email, oldpassword, newpassword)
+        if(user){
+            res.status(200).json("Password Changed Sucessfully")
+        }
+        else{
+            res.status(404).json({message:"an error "})
+        }
+
+    }
+    catch (err) {
+        res.status(500).json(err.message ) 
     }
 })
 
