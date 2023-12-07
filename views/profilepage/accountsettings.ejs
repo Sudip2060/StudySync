@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
+    <title>Profile/Account Settings</title>
+    <link rel="stylesheet" href="/others/Profile_page_CSS/Style1.css">
+    <script src="/functions/Profilefunc.js" defer></script>
+</head>
+
+<body>
+    <%- include('../partials/top'); %>
+        <div class="main">
+            <div class="left">
+                <div class="left-heading">
+                    <P>Account Settings</P>
+                </div>
+                <div class="left-main">
+                    <div class="AS-left-left">
+                        <div class="AS-email-holder">
+                            <P class="Email-label">
+                                Email Address
+                            </P>
+                            <input type="email" class="AS-emailvalue">
+                        </div>
+                        <div class="AS-phoneno-holder">
+                            <P class="Phoneno-label">
+                                Phone Number
+                            </P>
+                            <input type="number" class="AS-phonenovalue">
+                        </div>
+                        <div class="AS-postalcode-holder">
+                            <P class="Postalcode-label">
+                                Postal Code
+                            </P>
+                            <input type="text" class="AS-postalcodevalue">
+                        </div>
+                        <div class="AS-errormessagebox"></div>
+                        <button class="AS-savebutton">Save</button>
+                    </div>
+                </div>
+                </div>
+            <div class="right">
+                <div class="image-right">
+                    <img src="/images/Profile.png">
+                </div>
+                <div class="name-holder">
+                    <P class="prof_name">Professor Name</P>
+                </div>
+                <div class="right-buttons-holder">
+                    <div class="dashboard-button">
+                        <P class="button-label">Dashboard</P>
+                    </div>
+                    <div class="accountSettings-button">
+                        <P class="button-label">Account Settings</P>
+                    </div>
+                    <div class="changepassword-button">
+                        <P class="button-label">Change Password</P>
+                    </div>
+                    <div class="logout-button">
+                        <P class="button-label">Logout</P>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="overlay">
+            <div class="overlay-holder">
+                <div class="overlay_container">
+                    <div class="overlay_heading">
+                        <p>Are you sure you want to logout?</p>
+                    </div>
+                    <div class="stayback-button-holder">
+                        <button class="stayback">No, Stay in</button>
+                    </div>
+                    <div class="logout-button-holder">
+                        <button class="logout">Yes, logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include('../partials/foot'); %>
+            

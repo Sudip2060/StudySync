@@ -13,8 +13,7 @@ body {
 }
 
 #signup-button,
-#signin-button,
-#signup-submit-button {
+#signin-button {
     padding: 10px 15px;
     background-color: #096A2E;
     color: #ffffff;
@@ -24,22 +23,36 @@ body {
     font-size: 16px;
     border-radius: 60px;
     cursor: pointer;
-    width: 105px; 
+    width: 105px;
     font-family: 'JetBrains Mono';
 
 }
 
-#signup-button{
+#signup-button {
     font-weight: bold;
 }
 
-#signin-button,
-#signup-submit-button {
+#signin-button {
     font-weight: bold;
     width: 150px;
-    font-size: 16px;
     height: 48px;
     padding: 0px;
+}
+
+
+#signup-submit-button {
+    font-weight: bold;
+    font-size: 14px;
+    height: 45px;
+    background-color: #096A2E;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 40px;
+    cursor: pointer;
+    width: 115px;
+    font-family: 'JetBrains Mono';
 }
 
 #signup-button:hover,
@@ -79,6 +92,7 @@ body {
 
 .username-box,
 .password-box {
+    font-family: 'JetBrains Mono';
     background-color: #A2EABF;
     border-radius: 20px;
     height: 40px;
@@ -86,6 +100,18 @@ body {
     border: solid#000000 1px;
     outline: none;
     font-size: large;
+    text-align: center;
+    font-size: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+}
+
+.login-error {
+    font-size: 17px;
+    font-weight: 700;
+    color: #ff0000;
+    margin-top: 10px;
 
 }
 
@@ -220,8 +246,15 @@ Sign up page
 }
 
 .signup-submit {
-    margin-top: 40px;
+    margin-top: 20px;
 
+}
+
+#signuperr {
+    margin-top: 20px;
+    color: #ff0000;
+    font-weight: 800;
+    font-size: 16px;
 }
 
 footer {
