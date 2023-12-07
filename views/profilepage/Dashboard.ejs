@@ -7,6 +7,8 @@
     <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
     <title>Profile</title>
     <link rel="stylesheet" href="/others/Profile_page_CSS/Style1.css">
+    <script src="/functions/Profilefunc.js" defer> </script>
+
 </head>
 
 <body>
@@ -17,6 +19,39 @@
                     <P>Dashboard</P>
                 </div>
                 <div class="left-main">
+
+                    <div class="DB-left-left">
+                        <div class="DB-fullnamecontainer">
+                            <p class="DB-fullname">Full name: Sudipa Ghimire</p>
+                        </div>
+                        <div class="DB-emailaddresscontainer">
+                            <p class="DB-emailaddress">Email address</p>
+                        </div>
+                        <div class="DB-phonenumbercontainer">
+                            <p class="DB-phonenumber">Phone number</p>
+                        </div>
+                        <div class="DB-institutioncontainer">
+                            <p class="DB-institution">Institution</p>
+                        </div>
+                        <div class="DB-designationcontainer">
+                            <p class="DB-designation">Designation: Professor</p>
+                        </div>
+                        <div class="DB-postalcodecontainer">
+                            <p class="DB-postalcode">Postalcode</p>
+                        </div>
+                    </div>
+                    <div class="DB-left-right">
+                        <div class="DB-studentemogicontainer">
+                            <img src="/images/student.png">
+                        </div>
+                        <p class="DB-studentstat">54 Students</p>
+                        <div class="DB-sectionemogicontainer">
+                            <img src="/images/section.png">
+                        </div>
+                        <p class="DB-sectionstat">4 Sections</p>
+                    </div>
+                    
+
                 </div>
             </div>
             <div class="right">
@@ -24,7 +59,11 @@
                     <img src="/images/Profile.png">
                 </div>
                 <div class="name-holder">
+
+                    <P class="prof_name"></P>
+
                     <P class="prof_name">Professor Name</P>
+
                 </div>
                 <div class="right-buttons-holder">
                     <div class="dashboard-button">
@@ -58,6 +97,9 @@
                 </div>
             </div>
         </div>
+
+ 
+
         <%- include('../partials/foot'); %>
             <script>
                 document.querySelector('.dashboard-button').addEventListener('click', () => {
@@ -96,3 +138,4 @@
 
 
             </script>
+

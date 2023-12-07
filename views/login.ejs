@@ -38,7 +38,6 @@
         </form>
     </div>
     <div class="login-error">
-
     </div>
     <footer>
         <P>Copyright &copy; 2023 StudySync. All rights reserved.</P>
@@ -79,12 +78,19 @@
             }
             )
             if (res.ok) {
-                const data = await res.json()
-                console.log(data)
                 window.location.href = '/'
             }
-            else if (res.status = 401){
-                document.querySelector('.login-error').textContent = 'User not found'
+            else {
+                const errordata = await res.json()
+                showmessage(errordata)
+            }
+
+            function showmessage(message) {
+                let messagebox = document.querySelector('.login-error')
+                messagebox.textContent = message
+                setTimeout(() => {
+                    messagebox.textContent = ''
+                }, 1500);
             }
 
         }

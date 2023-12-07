@@ -110,11 +110,11 @@
                         </div>
                     </div>
                 </div>
+                <div class="signup-submit">
+                    <button type="button" id="signup-submit-button">Register</button>
+                </div>
                 <div id="signuperr">
                 </div>
-                    <div class="signup-submit">
-                        <button type="button" id="signup-submit-button">Register</button>
-                    </div>
 
             </form>
         </div>
@@ -142,23 +142,31 @@
 
         function validateForm() {
             if (!(firstname && lastname && dateofbirth && institution && phonenumber && postalcode && email && password && confirmpassword)) {
-                document.getElementById('signuperr').textContent = 'Fill the form details completely';
+                let message = 'Fill the form details completely';
+                showsignupmessage(message)
                 return false;
             }
             if (password !== confirmpassword) {
-                document.getElementById('signuperr').textContent = 'Passwords do not match';
+                let message = 'Passwords do not match';
+                showsignupmessage(message)
                 return false;
             }
             if (/[a-zA-Z]/.test(phonenumber)) {
-                document.getElementById('signuperr').textContent = 'Phone number should not contain alphabets';
+                let message = 'Phone number should not contain alphabets';
+                showsignupmessage(message)
                 return false;
             }
-            document.getElementById('signuperr').textContent = '';
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                let message = 'Invalid email address format';
+                showsignupmessage(message);
+                return false;
+            }
             return true;
         }
 
         if (validateForm()) {
-            async function regiser() {
+            async function register() {
                 try {
                     const res = await fetch('/signup', {
                         method: 'post',
@@ -167,10 +175,9 @@
                     })
 
                     if (res.ok) {
-                        const data = await res.json()
-                        console.log(data)
-                        document.getElementById('signuperr').textContent='Registration Successful'
-                        
+                        let sucessfulmessage = 'Registration Successful'
+                        document.getElementById('signuperr').style.color = '#008000'
+                        showsignupmessage(sucessfulmessage)
                     }
                     else {
                         const error = await res.json()
@@ -182,11 +189,15 @@
                     console.dir(err)
                 }
             }
-            regiser()
+            register()
             document.querySelector('form').reset()
-            
+        }
+        function showsignupmessage(message) {
+            let signupmessagebox = document.getElementById('signuperr')
+            signupmessagebox.textContent = message
+            setTimeout(() => {
+                signupmessagebox.textContent = ''
+            }, 1200)
         }
     }
-
-
 </script>

@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
-
-    <title>Profile/Change Password</title>
-
+    <title>Profile/Account Settings</title>
     <link rel="stylesheet" href="/others/Profile_page_CSS/Style1.css">
     <script src="/functions/Profilefunc.js" defer></script>
 </head>
@@ -17,27 +15,33 @@
         <div class="main">
             <div class="left">
                 <div class="left-heading">
-                    <P>Change Password</P>
+                    <P>Account Settings</P>
                 </div>
                 <div class="left-main">
-                    <div class="leftempty">
-                    </div>
-                    <div class="left-body">
-                        <p class="cplabels">Email address</p>
-                        <input type="text" class="cpemail">
-                        <p class="cplabels">Current Password</p>
-                        <input type="password" class="cpcurrentpassword">
-                        <p class="cplabels">New Password</p>
-                        <input type="password" class="cpnewpassword">
-                        <p class="cplabels">Confirm new Password</p>
-                        <input type="password" class="cpconfirmpassword">
-                        <div class="messagebox"></div>
-                    </div>
-                    <div class="saveright">
-                        <button class="savebutton">Save</button>
+                    <div class="AS-left-left">
+                        <div class="AS-email-holder">
+                            <P class="Email-label">
+                                Email Address
+                            </P>
+                            <input type="email" class="AS-emailvalue">
+                        </div>
+                        <div class="AS-phoneno-holder">
+                            <P class="Phoneno-label">
+                                Phone Number
+                            </P>
+                            <input type="number" class="AS-phonenovalue">
+                        </div>
+                        <div class="AS-postalcode-holder">
+                            <P class="Postalcode-label">
+                                Postal Code
+                            </P>
+                            <input type="text" class="AS-postalcodevalue">
+                        </div>
+                        <div class="AS-errormessagebox"></div>
+                        <button class="AS-savebutton">Save</button>
                     </div>
                 </div>
-            </div>
+                </div>
             <div class="right">
                 <div class="image-right">
                     <img src="/images/Profile.png">
