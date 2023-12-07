@@ -184,6 +184,8 @@ nav a:active::after,
     width: 20%;
 }
 
+
+
 .savebutton {
     background-color: #50c7fa;
     color: rgb(0, 0, 0);
@@ -419,119 +421,3 @@ footer {
     font-size: x-small;
     margin-top: 20px;
 }
-
-/* Account Settings*/
-.AS-left-left{
-    margin-top: 20px;
-    width: 100%;
-    text-align: center;
-}
-
-.AS-email-holder, .AS-phoneno-holder, .AS-postalcode-holder{
-    margin-bottom: 15px;
-}
-.AS-email-holder p, .AS-phoneno-holder p, .AS-postalcode-holder p{
-    margin: 0;
-    margin-top:10px;
-}
-
-.Email-label, .Phoneno-label, .Postalcode-label{
-    font-weight: 600;
-}
-
-.AS-emailvalue, .AS-phonenovalue, .AS-postalcodevalue{
-    text-align: center;
-    background-color: #D7F0D8;
-    border: 1px solid #000000;
-    border-radius: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
-    height: 40px;
-    width: 40%;
-    margin-top: 4px;
-    outline: none;
-    font-family: "JetBrains Mono";
-    font-size: 15px;
-}
-
-.AS-errormessagebox{
-    color: #ff0000;
-    font-weight: 700;
-    font-size: 15px;
-}
-
-.AS-savebutton{
-    position: relative;
-    left: 250px;
-    background-color: #50c7fa;
-    color: rgb(0, 0, 0);
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 15px;
-    border-radius: 48px;
-    cursor: pointer;
-    width: 80px;
-    font-family: 'JetBrains Mono';
-    font-weight: bold;
-    height: 35px;
-
-}
-
-/* Dashboard Page */
-
-
-.DB-left-left{
-    text-align: center;
-    width: 50%;
-}
-
-.DB-fullnamecontainer,.DB-emailaddresscontainer,.DB-phonenumbercontainer,.DB-institutioncontainer,.DB-designationcontainer,.DB-postalcodecontainer{
-    margin: auto;
-    margin-top: 10px;
-    background-color: #B7E3BE;
-    border-radius: 30px;
-    min-height: 40px;
-    width: 80%;
-    align-items: center;
-    font-weight: 700;
-    padding-top: 5px;
-    font-size: 13px;
-    margin-bottom: 10px;
-}
-
-.DB-fullnamecontainer p,.DB-emailaddresscontainer p,.DB-phonenumbercontainer p,.DB-institutioncontainer p,.DB-designationcontainer p,.DB-postalcodecontainer p{
-    margin: 0;
-    margin-top: 9px;
-    padding:0;
-}
-
-.DB-left-right{
-    text-align: center;
-    width: 50%;
-}
-
-.DB-studentemogicontainer,.DB-sectionemogicontainer{
-    margin: auto;
-    margin-top: 40px;
-    box-sizing: border-box;
-    width: 70px;
-    height: 66px;
-    text-align: center;
-    align-items: center;
-    background: #48D8A4;
-    border: 1px solid #000000;
-    border-radius: 25px;
-    padding-top: 7px;
-}
-.DB-studentemogicontainer img, .DB-sectionemogicontainer img{
-    width: 50px;
-}
-
-.DB-studentstat, .DB-sectionstat{
-    margin: 0;
-    margin-top: 10px;
-    font-weight: 700;
-    font-size: 18px;
-}
-

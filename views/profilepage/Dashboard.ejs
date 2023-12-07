@@ -8,6 +8,7 @@
     <title>Profile</title>
     <link rel="stylesheet" href="/others/Profile_page_CSS/Style1.css">
     <script src="/functions/Profilefunc.js" defer> </script>
+
 </head>
 
 <body>
@@ -18,6 +19,7 @@
                     <P>Dashboard</P>
                 </div>
                 <div class="left-main">
+
                     <div class="DB-left-left">
                         <div class="DB-fullnamecontainer">
                             <p class="DB-fullname">Full name: Sudipa Ghimire</p>
@@ -49,6 +51,7 @@
                         <p class="DB-sectionstat">4 Sections</p>
                     </div>
                     
+
                 </div>
             </div>
             <div class="right">
@@ -56,7 +59,11 @@
                     <img src="/images/Profile.png">
                 </div>
                 <div class="name-holder">
+
                     <P class="prof_name"></P>
+
+                    <P class="prof_name">Professor Name</P>
+
                 </div>
                 <div class="right-buttons-holder">
                     <div class="dashboard-button">
@@ -90,4 +97,45 @@
                 </div>
             </div>
         </div>
+
+ 
+
         <%- include('../partials/foot'); %>
+            <script>
+                document.querySelector('.dashboard-button').addEventListener('click', () => {
+                    window.location.href = 'Dashboard.html'
+                })
+                document.querySelector('.changepassword-button').addEventListener('click', () => {
+                    window.location.href = '/changepassword'
+                })
+                document.querySelector('.logout-button').addEventListener('click', () => {
+                    document.querySelector('.overlay').style.display = 'block'
+                })
+                document.querySelector('.stayback').onclick = () => {
+                    document.querySelector('.overlay').style.display = 'none'
+                }
+
+                document.querySelector('.logout').addEventListener('click', async () => {
+                    try {
+                        const res = await fetch('/logout', {
+                            method: 'post',
+                            headers: {
+                                'content-type': 'application/json'
+                            }
+                        })
+                        if (res.ok) {
+                            console.log('Logout Successfull')
+                            window.location.href = '/login'
+                        }
+                        else {
+                            console.error('logout failed')
+                        }
+                    }
+                    catch (err) {
+                        console.log(err)
+                    }
+                })
+
+
+            </script>
+
