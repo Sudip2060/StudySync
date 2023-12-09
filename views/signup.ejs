@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +7,6 @@
     <link rel="stylesheet" href="/others/style1.css">
     <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
 </head>
-
 <body>
     <div id="left-side">
         <div id="logo-div">
@@ -120,14 +118,12 @@
         </div>
     </div>
 </body>
-
 </html>
 <script>
     let login_message = document.getElementById('sign-inmessage')
     login_message.onclick = function () {
         window.location.href = '/login'
     }
-
     let signup_button = document.getElementById('signup-submit-button')
     signup_button.onclick = async function () {
         let firstname = document.getElementById('firstname').value;
@@ -139,7 +135,6 @@
         let email = document.getElementById('email').value;
         let password = document.getElementById('password').value;
         let confirmpassword = document.getElementById('confirm-password').value;
-
         function validateForm() {
             if (!(firstname && lastname && dateofbirth && institution && phonenumber && postalcode && email && password && confirmpassword)) {
                 let message = 'Fill the form details completely';
@@ -164,7 +159,6 @@
             }
             return true;
         }
-
         if (validateForm()) {
             async function register() {
                 try {
@@ -173,7 +167,6 @@
                         body: JSON.stringify({ firstname, lastname, dateofbirth, institution, phonenumber, postalcode, email, password }),
                         headers: { 'Content-type': 'application/json' }
                     })
-
                     if (res.ok) {
                         let sucessfulmessage = 'Registration Successful'
                         document.getElementById('signuperr').style.color = '#008000'

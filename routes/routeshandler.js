@@ -12,5 +12,6 @@ Router.get('/assignments', authentication, (req, res) => { res.render('assignmen
 Router.get('/profile', authentication ,(req, res) => { res.render('profilepage/Dashboard.ejs') })
 Router.get('/changepassword', authentication,(req,res)=>{res.render('profilepage/changepassword.ejs')})
 Router.get('/accountsettings', authentication,(req,res)=>{res.render('profilepage/accountsettings.ejs')})
+Router.get('/editassignment',(req,res)=>{res.render('editassignment')})
 
 module.exports = Router; 

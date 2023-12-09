@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
+    <title>Edit Assignment</title>
+    <link rel="stylesheet" href="/others/style4.css">
+    <script src="/functions/assignfunc.js" defer></script>
+</head>
+
+<body>
+    <%- include('partials/top'); %>
+        <div class="back-link">
+            <a href="/assignments">back to Assignments</a>
+        </div>
+        <div class="main">
+            <div class="EA-whole">
+                <p class="EA-head">
+                    Edit Assignment
+                </p>
+                <div class="EA-Body">
+                    <div class="EA-Assignmentname-holder">
+                        <P class="EA-Assignment-label">
+                            Assignment Name
+                        </P>
+                        <input type="text" class="EA-Assignmentname">
+                    </div>
+                    <div class="EA-Dates-holder">
+                        <div class="EA-Startdate-holder">
+                            <P class="EA-startdate-label">Start Date</P>
+                            <input type="date" class="EA-startdate">
+                        </div>
+                        <div class="EA-enddate-holder">
+                            <p class="EA-enddate-label">End Date</p>
+                            <input type="date" class="EA-enddate">
+                        </div>
+                    </div>
+                    <div class="EA-Instructions-holder">
+                        <P class="EA-Instructions-label">
+                            Instructions
+                        </P>
+                        <textarea class="EA-instructions"></textarea>
+                    </div>
+                </div>
+                <div class="EA-savebutton-holder">
+                    <button class="EA-savebutton">Save</button>
+                </div>
+            </div>
+        </div>
+        <%- include('partials/foot'); %>

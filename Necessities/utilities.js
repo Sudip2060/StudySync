@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/schema')
 require('dotenv').config()
-
 const createtoken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: 3 * 24 * 60 * 60 });
 }
@@ -24,5 +23,4 @@ const authentication = async (req, res, next) => {
         res.redirect('/login')
     }
 }
-
 module.exports = { createtoken, authentication };

@@ -6,7 +6,6 @@ body {
     color: #096A2E;
     text-align: center;
 }
-
 .logo-img {
     height: 200px;
     width: 270px;
@@ -60,32 +59,26 @@ body {
 #signup-submit-button:hover {
     background-color: #0b7b36;
 }
-
 .login-top {
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
 }
-
 #signup-div {
     padding-top: 100px;
     padding-right: 20px;
 }
-
 .login-header {
     font-size: 18px;
     margin-bottom: 0;
 }
-
 .login-header h1 {
     margin: 0;
 }
-
 .login-form {
     margin-top: 15px;
     flex: 1;
 }
-
 .form-row {
     margin-top: 15px;
 }
@@ -123,11 +116,9 @@ body {
     padding: 0px;
     color: rgb(0, 0, 0, 0.4);
 }
-
 .reset-password {
     margin-top: 5px;
 }
-
 .rstpwd {
     font-size: 14px;
     font-weight: bold;
@@ -136,7 +127,6 @@ body {
     display: inline-block;
     margin-top: 0;
 }
-
 .rstpwd::after {
     content: "";
     display: block;
@@ -147,38 +137,29 @@ body {
     left: 0;
     transition: width 0.2s;
 }
-
 .rstpwd:hover::after {
     width: 100%;
 }
-
 /*
-
 Sign up page
-
 */
-
 #left-side {
     float: left;
     width: 50%;
     min-height: 100vh;
-
 }
-
 .welcome-message {
     color: #000000;
     font-size: 44px;
     font-weight: 500;
     margin-left: 10px;
 }
-
 .CTA {
     color: #000000;
     font-weight: 700;
     font-size: 12px;
     margin-bottom: 0;
 }
-
 #sign-inmessage {
     margin-top: 0px;
     font-weight: 750;
@@ -187,9 +168,7 @@ Sign up page
     display: inline-block;
     position: relative;
     cursor: pointer;
-
 }
-
 #sign-inmessage::after {
     content: "";
     display: block;
@@ -200,40 +179,31 @@ Sign up page
     left: 0;
     transition: width 0.3s ease;
 }
-
 #sign-inmessage:hover::after {
     width: 100%;
 }
-
 #right-side {
     float: right;
     width: 50%;
     background-color: #9BDC90;
     min-height: 100vh;
 }
-
 .signup-head {
     margin-top: 90px;
     color: #000000;
-
 }
-
 .signup-head h2 {
     font-size: 30px;
-
 }
-
 .signup-form-row {
     display: flex;
     justify-content: space-evenly;
     margin-top: 10px;
 }
-
 .form-label label {
     font-weight: bold;
     color: black;
 }
-
 .form-input input {
     margin-top: 4px;
     background-color: white;

@@ -31,7 +31,6 @@ const userschema = new mongoose.Schema({
         type: String
     }
 })
-
 userschema.pre('save', async function (next) {
     const salt = await bcrypt.genSalt();
     this.password = await bcrypt.hash(this.password, salt);
@@ -84,5 +83,4 @@ userschema.statics.updatepassword = async function (email, oldpassword, newpassw
 }
 
 const User = mongoose.model('user', userschema)
-
 module.exports = User;
