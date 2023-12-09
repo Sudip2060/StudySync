@@ -127,10 +127,6 @@ router.put('/assignments/update',async(req,res)=>{
 })
 
 
-
-
-
-
 /* For Developers Purpose Only*/
 
 //delete all assignments 

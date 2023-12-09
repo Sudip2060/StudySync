@@ -6,15 +6,13 @@ body {
     color: #096A2E;
     text-align: center;
 }
-
 .logo-img {
     height: 200px;
     width: 270px;
 }
 
 #signup-button,
-#signin-button,
-#signup-submit-button {
+#signin-button {
     padding: 10px 15px;
     background-color: #096A2E;
     color: #ffffff;
@@ -24,22 +22,36 @@ body {
     font-size: 16px;
     border-radius: 60px;
     cursor: pointer;
-    width: 105px; 
+    width: 105px;
     font-family: 'JetBrains Mono';
 
 }
 
-#signup-button{
+#signup-button {
     font-weight: bold;
 }
 
-#signin-button,
-#signup-submit-button {
+#signin-button {
     font-weight: bold;
     width: 150px;
-    font-size: 16px;
     height: 48px;
     padding: 0px;
+}
+
+
+#signup-submit-button {
+    font-weight: bold;
+    font-size: 14px;
+    height: 45px;
+    background-color: #096A2E;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 40px;
+    cursor: pointer;
+    width: 115px;
+    font-family: 'JetBrains Mono';
 }
 
 #signup-button:hover,
@@ -47,38 +59,33 @@ body {
 #signup-submit-button:hover {
     background-color: #0b7b36;
 }
-
 .login-top {
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
 }
-
 #signup-div {
     padding-top: 100px;
     padding-right: 20px;
 }
-
 .login-header {
     font-size: 18px;
     margin-bottom: 0;
 }
-
 .login-header h1 {
     margin: 0;
 }
-
 .login-form {
     margin-top: 15px;
     flex: 1;
 }
-
 .form-row {
     margin-top: 15px;
 }
 
 .username-box,
 .password-box {
+    font-family: 'JetBrains Mono';
     background-color: #A2EABF;
     border-radius: 20px;
     height: 40px;
@@ -86,6 +93,18 @@ body {
     border: solid#000000 1px;
     outline: none;
     font-size: large;
+    text-align: center;
+    font-size: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+}
+
+.login-error {
+    font-size: 17px;
+    font-weight: 700;
+    color: #ff0000;
+    margin-top: 10px;
 
 }
 
@@ -97,11 +116,9 @@ body {
     padding: 0px;
     color: rgb(0, 0, 0, 0.4);
 }
-
 .reset-password {
     margin-top: 5px;
 }
-
 .rstpwd {
     font-size: 14px;
     font-weight: bold;
@@ -110,7 +127,6 @@ body {
     display: inline-block;
     margin-top: 0;
 }
-
 .rstpwd::after {
     content: "";
     display: block;
@@ -121,38 +137,29 @@ body {
     left: 0;
     transition: width 0.2s;
 }
-
 .rstpwd:hover::after {
     width: 100%;
 }
-
 /*
-
 Sign up page
-
 */
-
 #left-side {
     float: left;
     width: 50%;
     min-height: 100vh;
-
 }
-
 .welcome-message {
     color: #000000;
     font-size: 44px;
     font-weight: 500;
     margin-left: 10px;
 }
-
 .CTA {
     color: #000000;
     font-weight: 700;
     font-size: 12px;
     margin-bottom: 0;
 }
-
 #sign-inmessage {
     margin-top: 0px;
     font-weight: 750;
@@ -161,9 +168,7 @@ Sign up page
     display: inline-block;
     position: relative;
     cursor: pointer;
-
 }
-
 #sign-inmessage::after {
     content: "";
     display: block;
@@ -174,40 +179,31 @@ Sign up page
     left: 0;
     transition: width 0.3s ease;
 }
-
 #sign-inmessage:hover::after {
     width: 100%;
 }
-
 #right-side {
     float: right;
     width: 50%;
     background-color: #9BDC90;
     min-height: 100vh;
 }
-
 .signup-head {
     margin-top: 90px;
     color: #000000;
-
 }
-
 .signup-head h2 {
     font-size: 30px;
-
 }
-
 .signup-form-row {
     display: flex;
     justify-content: space-evenly;
     margin-top: 10px;
 }
-
 .form-label label {
     font-weight: bold;
     color: black;
 }
-
 .form-input input {
     margin-top: 4px;
     background-color: white;
@@ -220,8 +216,15 @@ Sign up page
 }
 
 .signup-submit {
-    margin-top: 40px;
+    margin-top: 20px;
 
+}
+
+#signuperr {
+    margin-top: 20px;
+    color: #ff0000;
+    font-weight: 800;
+    font-size: 16px;
 }
 
 footer {

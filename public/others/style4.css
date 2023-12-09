@@ -153,17 +153,6 @@ nav a:active::after,
     padding-bottom: 10px;
 }
 
-
-
-
-.assignment-container {
-    padding-top: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-
 #assignmentcheck {
     margin-left: 20px;
     width: 20px;
@@ -172,6 +161,7 @@ nav a:active::after,
 
 .assignment-box {
     margin: auto;
+    margin-top: 10px;
     text-align: center;
     height: 45px;
     background: #A8EE9D;
@@ -192,7 +182,6 @@ nav a:active::after,
 
 .assignment-box:hover {
     box-shadow: 2px 0px 10px rgba(37, 37, 34, 0.7);
-    background-color: #48D8A4;
 }
 
 #assignmenttitle {
@@ -247,14 +236,14 @@ nav a:active::after,
 
 
 
-.preview-head{
+.preview-head {
     margin: 0;
     margin-top: 3px;
 }
 
-.emptypreviewmessage{  
-   margin-top: 50px;
-   color: rgb(120, 117, 117);
+.emptypreviewmessage {
+    margin-top: 50px;
+    color: rgb(120, 117, 117);
 }
 
 
@@ -271,18 +260,23 @@ nav a:active::after,
 }
 
 
-.previewAssignmenttitle, .Assignmentinstrutiontitle, .instructionsBody,.PreviewAssignmentstartdate, .PreviewAssignmentenddate{
+.previewAssignmenttitle,
+.Assignmentinstrutiontitle,
+.instructionsBody,
+.PreviewAssignmentstartdate,
+.PreviewAssignmentenddate {
     margin: 0;
 }
 
 
-.previewAssignment-head{
+.previewAssignment-head {
     font-size: 20px;
     font-weight: 800;
     color: #000;
     margin-bottom: 10px;
 }
-.previewAssignment-date{
+
+.previewAssignment-date {
     font-size: 12px;
     font-weight: 600;
     display: flex;
@@ -291,12 +285,13 @@ nav a:active::after,
     margin-bottom: 10px;
 }
 
-.Assignmentinstrutiontitle{
+.Assignmentinstrutiontitle {
     font-size: 20px;
-    font-weight: 900 ;
+    font-weight: 900;
 
 }
-.instructionsBody{
+
+.instructionsBody {
     font-size: 11px;
     font-weight: 500;
     padding-left: 5px;
@@ -373,7 +368,7 @@ nav a:active::after,
 
 }
 
-.overlay-holder{
+.overlay-holder {
     width: 980px;
     margin: auto;
 }
@@ -488,7 +483,7 @@ nav a:active::after,
     padding-right: 10px;
 }
 
-.form-input-instructions textarea{
+.form-input-instructions textarea {
     margin-top: 5px;
     width: 300px;
     height: 200px;
@@ -500,12 +495,13 @@ nav a:active::after,
     padding-right: 10px;
 
 }
+
 .overlay-submit {
     margin-bottom: 20px;
     text-align: center;
 }
 
-#assignmentaddbutton{
+#assignmentaddbutton {
     padding: 10px 15px;
     background-color: #096A2E;
     color: white;
@@ -520,9 +516,10 @@ nav a:active::after,
     font-weight: bold;
 }
 
-.message-box{
+.message-box {
     font-size: 14px;
 }
+
 #assignmentaddbutton:hover {
     background-color: #0b7b36;
 }
@@ -534,4 +531,110 @@ footer {
     text-align: center;
     font-size: x-small;
     margin-top: 20px;
+}
+
+/* Edit Assignment */
+.EA-whole {
+    margin: auto;
+    background-color: white;
+    width: 100%;
+    border-radius: 30px;
+    text-align: center;
+    padding-bottom: 50px;
+}
+
+.EA-head {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 800;
+    margin-top: 10px;
+}
+
+.EA-Dates-holder {
+    display: flex;
+    justify-content: space-around;
+}
+
+.EA-Assignmentname-holder,
+.EA-Dates-holder,
+.EA-instructions-holder {
+    margin-bottom: 20px;
+}
+
+.EA-Assignmentname-holder p,
+.EA-Startdate-holder p,
+.EA-enddate-holder p,
+.EA-Instructions-holder p {
+    margin: 0;
+    margin-top: 15px;
+}
+
+.EA-Assignment-label,
+.EA-startdate-label,
+.EA-enddate-label,
+.EA-Instructions-label {
+    font-weight: 600;
+}
+
+.EA-Assignmentname {
+    text-align: center;
+    background-color: #D7F0D8;
+    border: 1px solid #000000;
+    border-radius: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 40px;
+    width: 30%;
+    margin-top: 4px;
+    outline: none;
+    font-family: "JetBrains Mono";
+    font-size: 15px;
+}
+
+.EA-startdate,
+.EA-enddate {
+    text-align: center;
+    background-color: #D7F0D8;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    width: 180px;
+    height: 30px;
+    outline: none;
+    font-family: "JetBrains Mono";
+    font-size: 12px;
+}
+
+.EA-instructions {
+    margin-top: 4px;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 70%;
+    height: 100px;
+    outline: none;
+    background-color: #D7F0D8;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.EA-savebutton {
+    position: absolute;
+    right: 10px;
+    bottom: 65px;
+    background-color: #2bace4;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    border-radius: 48px;
+    cursor: pointer;
+    width: 80px;
+    font-family: 'JetBrains Mono';
+    font-weight: bold;
+    height: 35px;
+}
+
+.EA-savebutton:hover {
+    background-color: #50c7fa;
 }

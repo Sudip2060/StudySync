@@ -7,6 +7,7 @@ function hideOverlay() {
     document.getElementById("overlay").style.display = "none";
 }
 
+
 document.getElementById('assignmentaddbutton').onclick = function () {
     const assignmentName = document.getElementById('sectionname').value;
     const startDate = document.getElementById('startdate').value;
@@ -61,14 +62,8 @@ async function postassignment() {
 }
 
 function addassignmentbar(assignmentname, sDate, edate) {
-    const newAssignmentContainer = document.createElement('div');
-    newAssignmentContainer.className = "assignment-container";
-
-
-
     const newAssignmentBox = document.createElement('div');
     newAssignmentBox.className = 'assignment-box';
-    newAssignmentContainer.appendChild(newAssignmentBox)
 
     const boxLeft = document.createElement('div');
     boxLeft.classList.add('box-left');
@@ -94,12 +89,18 @@ function addassignmentbar(assignmentname, sDate, edate) {
     boxRight.appendChild(endDateDiv);
 
     newAssignmentBox.appendChild(boxRight)
-    document.querySelector('.left-main').appendChild(newAssignmentContainer);
+    document.querySelector('.left-main').appendChild(newAssignmentBox);
 }
 
 
 document.querySelector('.left-main').addEventListener('click', function (event) {
     const assignmentbar = event.target.closest('.assignment-box')
+    document.querySelectorAll('.assignment-box').forEach(function (box) {
+        box.style.backgroundColor = '';
+        box.id = ''
+    });
+    assignmentbar.style.backgroundColor = '#48D8A4'
+    assignmentbar.setAttribute('id', 'clickeddiv')
     const assignmenttitle = assignmentbar.querySelector('#assignmenttitle').textContent
     viewassignment(assignmenttitle)
 })
@@ -114,7 +115,7 @@ function preview() {
     let previewAssignmenthead = document.createElement('div')
     previewAssignmenthead.setAttribute('class', 'previewAssignment-head')
     mainpreview.appendChild(previewAssignmenthead)
-    
+
     let previewassignmenttitle = document.createElement('p')
     previewassignmenttitle.setAttribute('class', 'previewAssignmenttitle')
     previewAssignmenthead.appendChild(previewassignmenttitle)
@@ -140,7 +141,7 @@ function preview() {
 
     let instructionsBody = document.createElement('p')
     instructionsBody.setAttribute('class', 'instructionsBody')
-    
+
     instructionscontainer.appendChild(instructionshead)
     instructionscontainer.appendChild(instructionsBody)
 }
@@ -155,11 +156,15 @@ async function viewassignment(assignmentname) {
         })
         if (res.ok) {
             previewmessagebox = document.querySelector('.emptypreviewmessage')
-            if(previewmessagebox){
+            if (previewmessagebox) {
                 document.querySelector('.right-header').removeChild(previewmessagebox)
             }
-            
+            oldpreviewcontainer = document.querySelector('.right-bodycontainer')
+            if (oldpreviewcontainer) {
+                document.querySelector('.right-main').removeChild(oldpreviewcontainer)
+            }
             preview()
+            createdeleteeditbutton()
             const data = await res.json()
             document.querySelector('.previewAssignmenttitle').textContent = data.assignment.assignmentname
 
@@ -178,7 +183,6 @@ async function viewassignment(assignmentname) {
         else {
             const error = await res.json()
             console.log(error)
-            document.querySelector('.test_div').textContent = JSON.stringify(error)
         }
     }
     catch (err) {
@@ -186,6 +190,82 @@ async function viewassignment(assignmentname) {
     }
 
 }
+
+
+function createdeleteeditbutton() {
+    let previouseditbutton = document.querySelector('editbutton-holder')
+    let previousdeletebutton = document.querySelector('.deletebutton-holder')
+    if (previousdeletebutton || previouseditbutton) {
+        return
+    }
+    else {
+        let buttoncontainer = document.querySelector('.right-foot')
+        let editbuttonholder = document.createElement('div')
+        editbuttonholder.setAttribute('class', 'editbutton-holder')
+        let editbutton = document.createElement('button')
+        editbutton.setAttribute('id', 'editbutton')
+        editbutton.textContent = 'edit'
+        editbuttonholder.appendChild(editbutton)
+        buttoncontainer.appendChild(editbuttonholder)
+        let deletebuttonholder = document.createElement('div')
+        deletebuttonholder.setAttribute('class', 'deletebutton-holder')
+        let deletebutton = document.createElement('button')
+        deletebutton.setAttribute('id', 'deletebutton')
+        deletebutton.textContent = 'Delete'
+        deletebuttonholder.appendChild(deletebutton)
+        buttoncontainer.appendChild(deletebuttonholder)
+    }
+    let deletebutton = document.getElementById('deletebutton')
+    if (deletebutton) {
+        deletebutton.onclick = deleteassignment
+
+    }
+    let assignmenteditbutton = document.querySelector('#editbutton')
+    if (assignmenteditbutton) {
+        assignmenteditbutton.onclick = editassignment;
+    }
+}
+async function deleteassignment() {
+    try {
+        let clickeddiv = document.getElementById('clickeddiv')
+        let assignmenttitle = clickeddiv.querySelector('#assignmenttitle').textContent
+        console.log(assignmenttitle)
+        const res = await fetch('assignments/delete?name=' + assignmenttitle, {
+            method: "delete",
+            headers: {
+                "Content-type": "application/json"
+            }
+        })
+        if (res.ok) {
+            console.log('Assignment deleted Successfully')
+            removebuttonsandpreview()
+        }
+        else {
+            console.log('error deleting the Assignment')
+        }
+    }
+    catch (err) {
+        console.log(err)
+    }
+}
+function removebuttonsandpreview() {
+    let bar_container = document.querySelector('.left-main')
+    bar_container.removeChild(clickeddiv)
+    let previewcontainer = document.querySelector('.right-main')
+    let previewbody = document.querySelector('.right-bodycontainer')
+    previewcontainer.removeChild(previewbody)
+    let olddeletebutton = document.querySelector('.deletebutton-holder')
+    let oldeditbutton = document.querySelector('.editbutton-holder')
+    let buttoncontainers = document.querySelector('.right-foot')
+    buttoncontainers.removeChild(olddeletebutton)
+    buttoncontainers.removeChild(oldeditbutton)
+}
+
+function editassignment(){
+    window.location.href='/editassignment'
+}
+
+
 
 
 
