@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
+    <title>Classlist</title>
+    <link rel="stylesheet" href="/others/clsstyles.css">
+
+<body>
+
+    <%- include('partials/top'); %>
+    <div class="main">
+        <div class="left">
+            <div class="left-heading">
+                <P>Actions</P>
+            </div>
+            <div class="left-main">
+                <div class="clst-stu-img-container">
+                    <img src="/images/student.png">
+                </div>
+                <div class="clst-stu-count">
+                    <p class="stu-count">14 students</p>
+                </div>
+                <div class="email-button-holder">
+                    <div class="email-button">
+                        <img src="/images/Email.png">
+                        <p>Email</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="middle">
+            <div class="middle-heading">
+                <P>Classlist </P>
+            </div>
+            <div class="middle-main">
+                <div class="classlistheader">
+                    <P>Image</P>
+                    <p>Student ID</p>
+                    <p>Student Name</p>
+                    <p>Role</p>
+                    <p>Email</p>
+                </div>
+                <div class="classlistrow">
+                    <div class="personimageholder">
+                        <div class="personimage">
+                            <img src="/images/male.png">
+                        </div>
+                    </div>
+                    <p class="clsstuid">
+                        301022002
+                    </p>
+                    <p class="clsstuname">
+                        Sudip Ghimire
+                    </p>
+                    <p class="clssturole">
+                        Student
+                    </p>
+                    <p class="clsstuemail">
+                        sghimi16@studysync.com
+                    </p>
+                    
+                </div>
+                <div class="classlistrow">
+                    <div class="personimageholder">
+                        <div class="personimage">
+                            <img src="/images/male.png">
+                        </div>
+                    </div>
+                    <p class="stuname">
+                        asdbkad ask aks k bk
+                    </p>
+
+                    <p class="week1attendance">
+                        present
+
+                    </p>
+                    <p class="week2attendance">
+                        present
+
+                    </p>
+                    <p class="week3attendance">
+
+                    </p>
+                    <p class="week4attendance">
+
+                    </p>
+                </div>
+                <div class="classlistrow">
+                    <div class="personimageholder">
+                        <div class="personimage">
+                            <img src="/images/female.png">
+                        </div>
+                    </div>
+                    <p class="stuname">
+                        Sudip
+                    </p>
+
+                    <p class="week1attendance">
+                        present
+
+                    </p>
+                    <p class="week2attendance">
+                        present
+
+                    </p>
+                    <p class="week3attendance">
+                    </p>
+                    <p class="week4attendance">
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="right-header">
+                <p>Sections</p>
+            </div>
+            <div class="sections-button-container">
+                <div class="section1-button">
+                    <P class="sectionbutton-label">Section 1</P>
+                </div>
+                <div class="section2-button">
+                    <P class="Sectionbutton-label">Section 2</P>
+                </div>
+                <div class="section3-button">
+                    <P class="sectionbutton-label">Section 3</P>
+                </div>
+                <div class="section4-button">
+                    <P class="sectionbutton-label">Section 4</P>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('partials/foot'); %>
+<script>
+    let flag = false
+    let email_button =document.querySelector('.email-button')
+    email_button.onclick = () =>{
+        if(!flag){
+            email_button.style.backgroundColor = 'aqua'
+            flag = true
+        }
+        else{
+            email_button.style.backgroundColor = ''
+            flag = false    
+        }
+    }
+</script>

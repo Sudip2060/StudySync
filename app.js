@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 app.use(cookieparser())
 app.use(express.static('public'));
 app.use(express.json())
-
 app.set('view engine', 'ejs');
 
 const usercontroller = require('./routes/usercontroller')
@@ -20,10 +19,6 @@ mongoose.connect(process.env.CONNECTION_URL).then(() => {
 }).catch((err) => {
     console.log(err)
 })
-
 app.use(routes)
 app.use(usercontroller)
 app.use(assignmentcontroller)
-
-
-

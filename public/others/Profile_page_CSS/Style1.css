@@ -199,7 +199,6 @@ nav a:active::after,
     position: relative;
     top: 290px;
     left: 20px
-
 }
 
 .savebutton:hover {
