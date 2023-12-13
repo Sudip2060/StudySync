@@ -36,7 +36,6 @@
         </form>
     </div>
     <div class="login-error">
-
     </div>
     <footer>
         <P>Copyright &copy; 2023 StudySync. All rights reserved.</P>
@@ -70,8 +69,6 @@
             }
             )
             if (res.ok) {
-                const data = await res.json()
-                console.log(data)
                 window.location.href = '/'
             }
             else {
