@@ -1,37 +1,44 @@
 
-document.getElementById('createbutton').onclick = function showOverlay() {
-    document.getElementById("overlay").style.display = "block";
-    document.querySelector('.message-box').textContent = "";
+let overlaycreatebutton = document.getElementById('createbutton')
+if (overlaycreatebutton) {
+    overlaycreatebutton.onclick = function showOverlay() {
+        document.getElementById("overlay").style.display = "block";
+        document.querySelector('.message-box').textContent = "";
+    }
 }
+
+
 function hideOverlay() {
     document.getElementById("overlay").style.display = "none";
 }
 
 
-document.getElementById('assignmentaddbutton').onclick = function () {
-    const assignmentName = document.getElementById('sectionname').value;
-    const startDate = document.getElementById('startdate').value;
-    const endDate = document.getElementById('enddate').value;
-    if (!assignmentName || !startDate || !endDate) {
-        alert('Please fill in all required fields.');
-        return;
-    }
-    const startDateObj = new Date(startDate);
-    const endDateObj = new Date(endDate);
-    if (startDateObj >= endDateObj) {
-        alert('Start date must be before the end date.');
-        return;
-    }
+let addassignmentbutton = document.getElementById('assignmentaddbutton')
+if (addassignmentbutton) {
+    addassignmentbutton.onclick = () => {
+        const assignmentName = document.getElementById('sectionname').value;
+        const startDate = document.getElementById('startdate').value;
+        const endDate = document.getElementById('enddate').value;
+        if (!assignmentName || !startDate || !endDate) {
+            alert('Please fill in all required fields.');
+            return;
+        }
+        const startDateObj = new Date(startDate);
+        const endDateObj = new Date(endDate);
+        if (startDateObj >= endDateObj) {
+            alert('Start date must be before the end date.');
+            return;
+        }
 
-    postassignment();
-    addassignmentbar(assignmentName, startDate, endDate)
-    document.getElementById('sectionname').value = '';
-    document.getElementById('startdate').value = '';
-    document.getElementById('enddate').value = '';
-    document.getElementById('instructions').value = '';
+        postassignment();
+        addassignmentbar(assignmentName, startDate, endDate)
+        document.getElementById('sectionname').value = '';
+        document.getElementById('startdate').value = '';
+        document.getElementById('enddate').value = '';
+        document.getElementById('instructions').value = '';
 
-};
-
+    };
+}
 
 async function postassignment() {
     const assignmentname = document.getElementById('sectionname').value;
@@ -93,17 +100,20 @@ function addassignmentbar(assignmentname, sDate, edate) {
 }
 
 
-document.querySelector('.left-main').addEventListener('click', function (event) {
-    const assignmentbar = event.target.closest('.assignment-box')
-    document.querySelectorAll('.assignment-box').forEach(function (box) {
-        box.style.backgroundColor = '';
-        box.id = ''
-    });
-    assignmentbar.style.backgroundColor = '#48D8A4'
-    assignmentbar.setAttribute('id', 'clickeddiv')
-    const assignmenttitle = assignmentbar.querySelector('#assignmenttitle').textContent
-    viewassignment(assignmenttitle)
-})
+let mainleftdiv = document.querySelector('.left-main')
+if (mainleftdiv) {
+    mainleftdiv.addEventListener('click', function (event) {
+        const assignmentbar = event.target.closest('.assignment-box')
+        document.querySelectorAll('.assignment-box').forEach(function (box) {
+            box.style.backgroundColor = '';
+            box.id = ''
+        });
+        assignmentbar.style.backgroundColor = '#48D8A4'
+        assignmentbar.setAttribute('id', 'clickeddiv')
+        const assignmenttitle = assignmentbar.querySelector('#assignmenttitle').textContent
+        viewassignment(assignmenttitle)
+    })
+}
 
 
 function preview() {
@@ -174,11 +184,6 @@ async function viewassignment(assignmentname) {
             document.querySelector('.PreviewAssignmentstartdate').textContent = 'Start Date: ' + dateformatter(Startdate)
             document.querySelector('.PreviewAssignmentenddate').textContent = 'End Date: ' + dateformatter(Enddate)
             document.querySelector('.instructionsBody').textContent = data.assignment.instructions
-
-            function dateformatter(date) {
-                let dateformat = { year: 'numeric', month: 'numeric', day: 'numeric' }
-                return date.toLocaleDateString('en-us', dateformat)
-            }
         }
         else {
             const error = await res.json()
@@ -190,7 +195,10 @@ async function viewassignment(assignmentname) {
     }
 
 }
-
+function dateformatter(date) {
+    let dateformat = { year: 'numeric', month: 'numeric', day: 'numeric' }
+    return date.toLocaleDateString('en-us', dateformat)
+}
 
 function createdeleteeditbutton() {
     let previouseditbutton = document.querySelector('editbutton-holder')
@@ -222,14 +230,18 @@ function createdeleteeditbutton() {
     }
     let assignmenteditbutton = document.querySelector('#editbutton')
     if (assignmenteditbutton) {
-        assignmenteditbutton.onclick = editassignment;
+        assignmenteditbutton.onclick = () => {
+            let assignmentBar = document.querySelector('#clickeddiv')
+            let assignmenttitle= assignmentBar.querySelector('#assignmenttitle').textContent
+            let url = '/editassignment?assignmentname='+encodeURIComponent(assignmenttitle)
+            window.location.href = url
+        }
     }
 }
 async function deleteassignment() {
     try {
         let clickeddiv = document.getElementById('clickeddiv')
         let assignmenttitle = clickeddiv.querySelector('#assignmenttitle').textContent
-        console.log(assignmenttitle)
         const res = await fetch('assignments/delete?name=' + assignmenttitle, {
             method: "delete",
             headers: {
@@ -261,12 +273,33 @@ function removebuttonsandpreview() {
     buttoncontainers.removeChild(oldeditbutton)
 }
 
-function editassignment(){
-    window.location.href='/editassignment'
-}
+window.addEventListener('load', async () => {
+    try {
+        const res = await fetch('/assignments/data', {
+            method: 'get',
+            headers: { 'content-type': 'application/json' }
+        })
+        if (res.ok) {
+            const retrievedassignments = await res.json()
+            retrievedassignments.forEach(assignment => {
+                let assignmentTitle = assignment.assignmentname
+                let startdate = new Date(assignment.startdate)
+                let formattedstartdate = dateformatter(startdate)
+                let enddate = new Date(assignment.enddate)
+                let formattedenddate = dateformatter(enddate)
+                addassignmentbar(assignmentTitle, formattedstartdate, formattedenddate)
+            });
+        }
+        else {
+            console.log('no data found')
+        }
+    }
+    catch (err) {
+        console.log(err.message)
+    }
+})
 
-
-
+module.exports = dateformatter
 
 
 

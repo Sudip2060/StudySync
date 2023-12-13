@@ -50,3 +50,36 @@
             </div>
         </div>
         <%- include('partials/foot'); %>
+
+            <script>
+
+                window.addEventListener('load', async () => {
+                    const urlparams = new URLSearchParams(window.location.search)
+                    const assignmentname = urlparams.get('assignmentname')
+                    try {
+                        const res = await fetch('/assignments/name?name=' + assignmentname, {
+                            method: 'get',
+                            headers: { 'content-type': 'application/json' }
+                        })
+                        if (res.ok) {
+                            const data = await res.json()
+                            console.log(data)
+                            let assignmenttitle = data.assignment.assignmentname
+                            let startdate = new Date(data.assignment.startdate)
+                            let enddate = new Date(data.assignment.enddate)
+                                function dateformatter(date) {
+                                    let dateformat = { year: 'numeric', month: 'numeric', day: 'numeric' }
+                                    return date.toLocaleDateString('en-us', dateformat)
+                                }
+                            document.querySelector('.EA-Assignmentname').value = assignmenttitle
+                            document.querySelector('.EA-startdate').value = startdate
+                        }
+                        else {
+                            console.log('no data found')
+                        }
+                    }
+                    catch (err) {
+                        console.log(err.message)
+                    }
+                })
+            </script>

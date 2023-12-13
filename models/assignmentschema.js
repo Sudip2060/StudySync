@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const assignmentschema = new mongoose.Schema({
-
+    userid:{
+        type : String
+    },
     assignmentname: {
         type: String
     },

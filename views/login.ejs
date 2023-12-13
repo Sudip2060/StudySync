@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +7,6 @@
     <link rel="stylesheet" href="/others/style1.css">
     <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
 </head>
-
 <body>
     <div class="login-top">
         <div id="logo-div">
@@ -44,30 +42,23 @@
         <P>Copyright &copy; 2023 StudySync. All rights reserved.</P>
     </footer>
 </body>
-
 </html>
-
 <script>
     document.getElementById('signup-button').onclick = function () {
         window.location.href = '/signup'
     }
-
-
     document.getElementById('signin-button').onclick = async () => {
         try {
             const email = document.querySelector('.username-box').value
             const password = document.querySelector('.password-box').value
-
             if (!email || !password) {
                 document.querySelector('.login-error').textContent = 'Both username and password are required!';
                 return;
             }
-
             function isValidEmail(email) {
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 return emailRegex.test(email);
             }
-
             if (!isValidEmail(email)) {
                 document.querySelector('.login-error').textContent = 'Please enter a valid email address.';
                 return;
@@ -83,16 +74,20 @@
                 console.log(data)
                 window.location.href = '/'
             }
-            else if (res.status = 401){
-                document.querySelector('.login-error').textContent = 'User not found'
+            else {
+                const errordata = await res.json()
+                showmessage(errordata)
             }
-
+            function showmessage(message) {
+                let messagebox = document.querySelector('.login-error')
+                messagebox.textContent = message
+                setTimeout(() => {
+                    messagebox.textContent = ''
+                }, 1500);
+            }
         }
         catch (err) {
             console.log(err)
         }
-
     }
-
-
 </script>
