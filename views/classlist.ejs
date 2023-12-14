@@ -7,6 +7,7 @@
     <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
     <title>Classlist</title>
     <link rel="stylesheet" href="/others/clsstyles.css">
+    <script src="/functions/classlistfunc.js" defer></script>
 
 <body>
 
@@ -33,7 +34,7 @@
         </div>
         <div class="middle">
             <div class="middle-heading">
-                <P>Classlist </P>
+                <P class="middle-header">Classlist </P>
             </div>
             <div class="middle-main">
                 <div class="classlistheader">
@@ -43,108 +44,27 @@
                     <p>Role</p>
                     <p>Email</p>
                 </div>
-                <div class="classlistrow">
-                    <div class="personimageholder">
-                        <div class="personimage">
-                            <img src="/images/male.png">
-                        </div>
-                    </div>
-                    <p class="clsstuid">
-                        301022002
-                    </p>
-                    <p class="clsstuname">
-                        Sudip Ghimire
-                    </p>
-                    <p class="clssturole">
-                        Student
-                    </p>
-                    <p class="clsstuemail">
-                        sghimi16@studysync.com
-                    </p>
-                    
-                </div>
-                <div class="classlistrow">
-                    <div class="personimageholder">
-                        <div class="personimage">
-                            <img src="/images/male.png">
-                        </div>
-                    </div>
-                    <p class="stuname">
-                        asdbkad ask aks k bk
-                    </p>
-
-                    <p class="week1attendance">
-                        present
-
-                    </p>
-                    <p class="week2attendance">
-                        present
-
-                    </p>
-                    <p class="week3attendance">
-
-                    </p>
-                    <p class="week4attendance">
-
-                    </p>
-                </div>
-                <div class="classlistrow">
-                    <div class="personimageholder">
-                        <div class="personimage">
-                            <img src="/images/female.png">
-                        </div>
-                    </div>
-                    <p class="stuname">
-                        Sudip
-                    </p>
-
-                    <p class="week1attendance">
-                        present
-
-                    </p>
-                    <p class="week2attendance">
-                        present
-
-                    </p>
-                    <p class="week3attendance">
-                    </p>
-                    <p class="week4attendance">
-                    </p>
-                </div>
             </div>
+            <p class="emptyclasslistmessage">Select a section to view the list of students</p>
         </div>
         <div class="right">
             <div class="right-header">
                 <p>Sections</p>
             </div>
             <div class="sections-button-container">
-                <div class="section1-button">
-                    <P class="sectionbutton-label">Section 1</P>
+                <div class="section-button">
+                    <P class="sectionbutton-label">section 1</P>
                 </div>
-                <div class="section2-button">
-                    <P class="Sectionbutton-label">Section 2</P>
+                <div class="section-button">
+                    <P class="sectionbutton-label">section 2</P>
                 </div>
-                <div class="section3-button">
-                    <P class="sectionbutton-label">Section 3</P>
+                <div class="section-button">
+                    <P class="sectionbutton-label">section 3</P>
                 </div>
-                <div class="section4-button">
-                    <P class="sectionbutton-label">Section 4</P>
+                <div class="section-button">
+                    <P class="sectionbutton-label">section 4</P>
                 </div>
             </div>
         </div>
     </div>
     <%- include('partials/foot'); %>
-<script>
-    let flag = false
-    let email_button =document.querySelector('.email-button')
-    email_button.onclick = () =>{
-        if(!flag){
-            email_button.style.backgroundColor = 'aqua'
-            flag = true
-        }
-        else{
-            email_button.style.backgroundColor = ''
-            flag = false    
-        }
-    }
-</script>
