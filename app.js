@@ -11,6 +11,7 @@ app.set('view engine', 'ejs');
 const usercontroller = require('./routes/usercontroller')
 const routes = require('./routes/routeshandler')
 const assignmentcontroller = require('./routes/assignmentcontroller');
+const studentcontroller = require('./routes/studentcontroller')
 
 app.use(express.json())
 app.listen(process.env.PORT, () => { console.log("app is running in 5000 port") })
@@ -22,3 +23,4 @@ mongoose.connect(process.env.CONNECTION_URL).then(() => {
 app.use(routes)
 app.use(usercontroller)
 app.use(assignmentcontroller)
+app.use(studentcontroller)
