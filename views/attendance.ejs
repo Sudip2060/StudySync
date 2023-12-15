@@ -11,111 +11,51 @@
 
 <body>
     <%- include('partials/top'); %>
-    <div class="main">
-        <div class="left">
-            <div class="left-heading">
-                <P>Attendance-Section 5 </P>
+        <div class="main">
+            <div class="left">
+                <div class="left-heading">
+                    <div class="empty-left"></div>
+                    <P class="head-header">Attendance</P>
+                    <div class="week-holder">
+                        <select class="week-select-button">
+                            <option>Week 1</option>
+                            <option>Week 2</option>
+                            <option>Week 3</option>
+                            <option>Week 4</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="left-main">
+                    <div class="attendanceheader">
+                        <p>Student ID</p>
+                        <p>Student Name</p>
+                        <P>Status</P>
+                    </div>
+                </div>
+                <div class="attendanceupdatemessagebox">
+                    <p class="attupdatemessage">Select a Section to see the attendance Status</p>
+                </div>
             </div>
-            <div class="left-main">
-                <div class="attendanceheader">
-                    <p>Student ID</p>
-                    <p>Student Name</p>
-                    <P>Week 1</P>
-                    <p>Week 2</p>
-                    <p>week 3</p>
-                    <p>week 4</p>
-                </div>
-                <div class="attendancerow">
-                    <p class="stuid">
-                        300055
-                    </p>
-                    <p class="stuname">
-                        asdbkadbk
-                    </p>
-                    <p class="week1attendance">
-                        present
-
-                    </p>
-                    <p class="week2attendance">
-                        present
-
-                    </p>
-                    <p class="week3attendance">
-
-                    </p>
-                    <p class="week4attendance">
-
-                    </p>
-                </div>
-                <div class="attendancerow">
-                    <p class="stuid">
-                        300055
-                    </p>
-                    <p class="stuname">
-                        asdbkad ask aks k bk
-                    </p>
-
-                    <p class="week1attendance">
-                        present
-
-                    </p>
-                    <p class="week2attendance">
-                        present
-
-                    </p>
-                    <p class="week3attendance">
-
-                    </p>
-                    <p class="week4attendance">
-
-                    </p>
-                </div>
-                <div class="attendancerow">
-                    <p class="stuid">
-                        301310055
-                    </p>
-                    <p class="stuname">
-                        Sudip
-                    </p>
-
-                    <p class="week1attendance">
-                        present
-
-                    </p>
-                    <p class="week2attendance">
-                        present
-
-                    </p>
-                    <p class="week3attendance">
-                    </p>
-                    <p class="week4attendance">
-                    </p>
-                </div>
-                
-            </div>
-        </div>
-
-
-        <div class="right">
-            <div class="right-main">
+            <div class="right">
                 <div class="right-header">
                     <p>Sections</p>
                 </div>
                 <div class="sections-button-container">
-                    <div class="section1-button">
-                        <P class="sectionbutton-label">Section 1</P>
+                    <div class="section-button">
+                        <P class="sectionbutton-label">section 1</P>
                     </div>
-                    <div class="section2-button">
-                        <P class="Sectionbutton-label">Section 2</P>
+                    <div class="section-button">
+                        <P class="sectionbutton-label">section 2</P>
                     </div>
-                    <div class="section3-button">
-                        <P class="sectionbutton-label">Section 3</P>
+                    <div class="section-button">
+                        <P class="sectionbutton-label">section 3</P>
                     </div>
-                    <div class="section4-button">
-                        <P class="sectionbutton-label">Section 4</P>
+                    <div class="section-button">
+                        <P class="sectionbutton-label">section 4</P>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <%- include('partials/foot'); %>
+
+
+        <%- include('partials/foot'); %>

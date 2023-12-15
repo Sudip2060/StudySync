@@ -1,6 +1,9 @@
 const express = require('express')
 const Router = express('Router')
 const Student = require('../models/Studentschema')
+const jwt = require('jsonwebtoken')
+require('dotenv').config()
+
 
 //A request to retrieve all the students data
 Router.get('/studentdata', async (req, res) => {
@@ -20,41 +23,92 @@ Router.get('/studentdata', async (req, res) => {
 })
 
 //A request to retrive all the students data based on the section
-Router.get('/students',async(req,res)=>{
-    try{
-        const studentsection = req.query.section
-        const studentdata = await Student.find({studentsection})
-        if(studentdata){
-            res.status(200).json(studentdata)
-        }
-        else{
-            res.status(404).json({message:"No data found"})
-        }
-    }
-    catch(err){
-        res.status(500).json(err.message)
-    }
-})
-
-
-Router.post('/students', async (req, res) => {
+Router.get('/students', async (req, res) => {
     try {
-        const { studentid, studentname, studentgender, studentemail, studentsection } = req.body
-        const newstudent = await Student.create({ studentid, studentemail, studentgender, studentname, studentsection })
-        if (newstudent) {
-            res.status(200).json(newstudent)
+        const studentsection = req.query.section
+        const token = req.cookies.jwt
+        const decodedtoken = jwt.verify(token, process.env.JWT_SECRET)
+        const teacherid = decodedtoken.id
+        const studentData = await Student.find({studentsection});
 
-        }
-        else {
-            res.status(404).json({ message: 'an error occured' })
-        }
+        const filteredStudentData = studentData.map((student) => {
+            const filteredAttendance = student.attendancestatus.filter(
+                (attendance) => attendance.teacherid === teacherid
+            );
+
+            return {
+                studentid: student.studentid,
+                studentname: student.studentname,
+                studentgender: student.studentgender,
+                studentemail: student.studentemail,
+                studentsection: student.studentsection,
+                attendancestatus: filteredAttendance,
+            };
+        });
+        res.status(200).json(filteredStudentData)
     }
     catch (err) {
         res.status(500).json(err.message)
         console.log(err.message)
-
     }
 })
+//
+Router.put('/attendancedata', async (req, res) => {
+    try {
+        const { studentsection, studentid, week, status } = req.body;
+        const token = req.cookies.jwt
+        const decodedtoken = jwt.verify(token, process.env.JWT_SECRET)
+        const teacherid = decodedtoken.id
+        const existingStudent = await Student.findOne({
+            studentsection,
+            studentid,
+            'attendancestatus.teacherid': teacherid,
+            'attendancestatus.week': week
+        });
+
+        if (existingStudent) {
+            const updatedData = await Student.findOneAndUpdate(
+                {
+                    studentsection,
+                    studentid,
+                    'attendancestatus.teacherid': teacherid,
+                    'attendancestatus.week': week
+                },
+                {
+                    $set: {
+                        'attendancestatus.$.status': status,
+                    }
+                },
+                { new: true }
+            );
+            res.status(200).json(updatedData);
+        } else {
+            const updatedData = await Student.findOneAndUpdate(
+                { studentsection, studentid },
+                {
+                    $push: {
+                        attendancestatus: {
+                            teacherid,
+                            week,
+                            status
+                        }
+                    }
+                },
+                { new: true, upsert: true }
+            );
+            res.status(200).json(updatedData);
+        }
+    }
+    catch (err) {
+        res.status(500).json(err.message)
+    }
+})
+
+
+
+
+
+
 
 Router.post('/morestudents', async (req, res) => {
     try {
@@ -65,11 +119,11 @@ Router.post('/morestudents', async (req, res) => {
             const newstudent = await Student.create({ studentid, studentname, studentgender, studentemail, studentsection })
             createdstudents.push(newstudent)
         }
-        if(createdstudents.length > 0){
+        if (createdstudents.length > 0) {
             res.status(200).json(createdstudents)
         }
-        else{
-            res.status(404).json({message:"no data found"})
+        else {
+            res.status(404).json({ message: "no data found" })
         }
     }
     catch (err) {
@@ -80,15 +134,16 @@ Router.post('/morestudents', async (req, res) => {
 })
 
 
-Router.delete('/students', async(req,res)=>{
-    try{
+
+Router.delete('/students', async (req, res) => {
+    try {
         const deletedstudents = await Student.deleteMany()
-        if(deletedstudents){
-            res.status(200).json({message:'All Students deleted'})
+        if (deletedstudents) {
+            res.status(200).json({ message: 'All Students deleted' })
         }
     }
-    catch(err){
-        
+    catch (err) {
+
     }
 })
 

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
+    <title>Edit Assignment</title>
+    <link rel="stylesheet" href="/others/assignmentstyles.css">
+</head>
+
+<body>
+    <%- include('../partials/top'); %>
+        <div class="main">
+            <div class="EA-whole">
+                <p class="EA-head">
+                    Edit Assignment
+                </p>
+                <div class="EA-Body">
+                    <div class="EA-Assignmentname-holder">
+                        <P class="EA-Assignment-label">
+                            Assignment Name
+                        </P>
+                        <input type="text" class="EA-Assignmentname">
+                    </div>
+                    <div class="EA-Dates-holder">
+                        <div class="EA-Startdate-holder">
+                            <P class="EA-startdate-label">Start Date</P>
+                            <input type="datetime-local" class="EA-startdate">
+                        </div>
+                        <div class="EA-enddate-holder">
+                            <p class="EA-enddate-label">End Date</p>
+                            <input type="datetime-local" class="EA-enddate">
+                        </div>
+                    </div>
+                    <div class="EA-Instructions-holder">
+                        <P class="EA-Instructions-label">
+                            Instructions
+                        </P>
+                        <textarea class="EA-instructions"></textarea>
+                    </div>
+                </div>
+                <div class="updatemessagebox">
+                    <P class="EA-updatedmessage"></P>
+                </div>
+                <div class="EA-savebutton-holder">
+                    <button class="EA-savebutton">Save</button>
+                </div>
+            </div>
+        </div>
+        <%- include('../partials/foot'); %>
+            <script>
+                let assignmentid;
+                window.addEventListener('load', async () => {
+                    const urlparams = new URLSearchParams(window.location.search)
+                    const assignmentname = urlparams.get('assignmentname')
+                    const section = urlparams.get('section')
+                    console.log(assignmentname,section)
+                    try {
+                        const res = await fetch('/assignments/name?name=' + assignmentname +'&section=' + section, {
+                            method: 'get',
+                            headers: { 'Content-type': 'application/json' }
+                        })
+                        if (res.ok) {
+                            const data = await res.json()
+                            let assignmenttitle = data.assignment.assignmentname
+                            let startdate = (data.assignment.startdate)
+                            let enddate = new Date(data.assignment.enddate)
+                            let Instructions = data.assignment.instructions
+                            document.querySelector('.EA-Assignmentname').value = assignmenttitle
+                            document.querySelector('.EA-startdate').value = formatAssignmentDate(startdate)
+                            document.querySelector('.EA-enddate').value = formatAssignmentDate(enddate)
+                            document.querySelector('.EA-instructions').value = Instructions
+                            assignmentid = data.assignment._id
+                        }
+                        else {
+                            console.log('no data found')
+                        }
+                    }
+                    catch (err) {
+                        console.log(err.message)
+                    }
+                })
+
+                document.querySelector('.EA-savebutton').addEventListener('click', async () => {
+                    const assignmentname = document.querySelector('.EA-Assignmentname').value
+                    const startdate = document.querySelector('.EA-startdate').value
+                    const enddate = document.querySelector('.EA-enddate').value
+                    const instructions = document.querySelector('.EA-instructions').value
+                    try {
+                        const res = await fetch('/assignments/update/' + assignmentid, {
+                            method: 'put',
+                            body: JSON.stringify({ assignmentname, startdate, enddate, instructions }),
+                            headers: { 'Content-type': 'application/json' }
+                        })
+                        if (res.ok) {
+                            const data = await res.json()
+                            showmessage()
+                            clearscreen()
+                            
+                        }
+                        else {
+                            const err = await res.json()
+                        }
+                    }
+                    catch (err) {
+                        console.log(err.message)
+                    }
+                })
+
+                function formatAssignmentDate(dateString) {
+                    let date = new Date(dateString);
+                    let formattedDate = date.toISOString().slice(0, 16);
+                    return formattedDate;
+                }
+
+                function showmessage(){
+                    let messagebox = document.querySelector('.EA-updatedmessage')
+                    let message = 'Updated Sucessfully'
+                    messagebox.textContent = message;
+
+                    setTimeout(() => {
+                        messagebox.textContent=''
+                    }, 1200);
+                }
+                function clearscreen(){
+                    document.querySelector('.EA-Assignmentname').value = ''
+                    document.querySelector('.EA-startdate').value=''
+                    document.querySelector('.EA-enddate').value=''
+                    document.querySelector('.EA-instructions').value = ''
+                }
+            </script>

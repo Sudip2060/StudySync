@@ -10,13 +10,19 @@ router.post('/assignments/new', async (req, res) => {
         const token = req.cookies.jwt;
         const decodedtoken = jwt.verify(token, process.env.JWT_SECRET);
         const userid = decodedtoken.id
-        const { assignmentname, startdate, enddate, instructions } = req.body;
-        const addassignment = await Assignment.create({ userid, assignmentname, startdate, enddate, instructions })
-        if (addassignment) {
-            res.status(200).json({ addassignment })
+        const { section, assignmentname, startdate, enddate, instructions } = req.body;
+        const previousassignment = await Assignment.findOne({ userid, section, assignmentname })
+        if (previousassignment) {
+            res.status(404).json({ message: "Assignment with that name already created" })
         }
         else {
-            res.status(404).json({ message: "couldn't add the assignment" })
+            const addassignment = await Assignment.create({ userid, section, assignmentname, startdate, enddate, instructions })
+            if (addassignment) {
+                res.status(200).json({ addassignment })
+            }
+            else {
+                res.status(404).json({ message: "couldn't add the assignment" })
+            }
         }
     }
     catch (err) {
@@ -32,7 +38,8 @@ router.get('/assignments/data', async (req, res) => {
         const token = req.cookies.jwt;
         const decodedtoken = jwt.verify(token, process.env.JWT_SECRET);
         const userid = decodedtoken.id
-        const assignmentdata = await Assignment.find({userid})
+        const section = req.query.sectionname
+        const assignmentdata = await Assignment.find({ userid, section })
         if (assignmentdata) {
 
             res.status(200).json(assignmentdata)
@@ -41,8 +48,8 @@ router.get('/assignments/data', async (req, res) => {
             res.status(404).json({ message: "no assignments found" })
         }
     }
-    catch(err){
-        res.status(500).json({message:"an error occured"})
+    catch (err) {
+        res.status(500).json({ message: "an error occured" })
         console.log(err.message)
     }
 })
@@ -54,11 +61,13 @@ router.get('/assignments/name', async (req, res) => {
         const decodedtoken = jwt.verify(token, process.env.JWT_SECRET);
         const userid = decodedtoken.id
         const assignmentname = req.query.name;
-        const assignment = await Assignment.findOne({userid, assignmentname });
+        const section = req.query.section
+        const assignment = await Assignment.findOne({ userid, section, assignmentname });
         if (assignment) {
             res.status(200).json({ assignment });
         } else {
             res.status(404).json({ message: "No data found" });
+            console.log('no data found')
         }
     } catch (err) {
         res.status(500).json({ message: "An error occurred" });
@@ -84,6 +93,26 @@ router.get('/assignmentdatas', async (req, res) => {
         console.error(err)
     }
 
+})
+
+router.put('/assignments/update/:id', async (req, res) => {
+    try {
+        const assignmentid = req.params.id
+        const { assignmentname, startdate, enddate, instructions } = req.body
+        const assignmentdata = await Assignment.findByIdAndUpdate(assignmentid,
+            { assignmentname, startdate, enddate, instructions }
+        )
+        if (assignmentdata) {
+            res.status(200).json({ message: 'assignment updated' })
+        }
+        else {
+            res.status(404).json({ message: "an error occured" })
+        }
+    }
+    catch (err) {
+        res.status(500).json({ message: "an error occured" })
+        console.error(err)
+    }
 })
 
 //delete new assignment by id

@@ -26,8 +26,8 @@ async function showstudentdata(section){
         })
         if(res.ok){
             const studentdata = await res.json()
-            console.log(studentdata.length)
             document.querySelector('.middle-header').textContent = 'Classlist-'+section
+            document.querySelector('.stu-count').textContent = studentdata.length + ' students'
             studentdata.forEach(student => {
                 addclasslistrows(student)
             });

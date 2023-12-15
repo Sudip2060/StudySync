@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
+    <title>Assignment</title>
+    <link rel="stylesheet" href="/others/assignmentstyles.css">
+    <script src="/functions/assignfunc.js" defer></script>
+</head>
+
+<body>
+    <%- include('../partials/top'); %>
+        <div class="main">
+            <div class="left">
+                <div class="left-heading">
+                    <p class="Assignment-left-header"></p>
+                </div>
+                <div class="left-main">
+                </div>
+            </div>
+            <div class="right">
+                <div class="right-main">
+                    <div class="right-header">
+                        <P class="preview-head">Preview</P>
+                        <p class="emptypreviewmessage">Nothing to preview</p>
+                    </div>
+                </div>
+                <div class="right-foot">
+                    <div class="createbutton-holder">
+                        <button id="createbutton">Create</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="overlay" id="overlay">
+            <div class="overlay-holder">
+                <div class="overlayclosebuttoncontainer">
+                    <button class="close-btn">X</button>
+                </div>
+                <div class="overlay_container">
+                    <div class="overlay-header">
+                        <div class="overlay_heading">
+                            <p>Add an Assignment</p>
+                        </div>
+                        <div class="section-emogi-container">
+                            <img src="/images/sub-section.png">
+                        </div>
+                    </div>
+                    <div class="overlay-form">
+                        <form>
+                            <div class="form-left">
+                                <div class="overlay-form-row">
+                                    <div class="overlay-Sectionname">
+                                        <div class="form-label">
+                                            <label for="sectionname">Assignment name</label>
+                                        </div>
+                                        <div class="form-input">
+                                            <input type="text" id="sectionname">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="overlay-form-row">
+                                    <div class="overlay-startdate">
+                                        <div class="form-label">
+                                            <label for="startdate">Start date</label>
+                                        </div>
+                                        <div class="form-input">
+                                            <input type="datetime-local" id="startdate">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="overlay-form-row">
+                                    <div class="overlay-enddate">
+                                        <div class="form-label">
+                                            <label for="enddate">End date</label>
+                                        </div>
+                                        <div class="form-input">
+                                            <input type="datetime-local" id="enddate">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-right">
+                                <div class="overlay-form-row">
+                                    <div class="overlay-Instructions">
+                                        <div class="form-label">
+                                            <label for="instructions">Instructions</label>
+                                        </div>
+                                        <div class="form-input-instructions">
+                                            <textarea id="instructions" rows="15" cols="60"
+                                                placeholder="enter your message here "></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="message-box">
+                        </div>
+                        <div class="overlay-submit">
+                            <button type="button" id="assignmentaddbutton">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+        <%- include('../partials/foot'); %>
