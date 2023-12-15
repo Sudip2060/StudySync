@@ -1,4 +1,17 @@
 const mongoose = require("mongoose")
+
+const attendanceschema = new mongoose.Schema({
+    teacherid:{
+        type:String
+    },
+    week:{
+        type:String
+    },
+    status:{
+        type:String
+    }
+})
+
 const studentschema = new mongoose.Schema({
     studentid:{
         type: String
@@ -14,7 +27,8 @@ const studentschema = new mongoose.Schema({
     },
     studentsection: {
         type: String
-    }
+    },
+    attendancestatus:[attendanceschema]
 }
 )
 
