@@ -20,6 +20,8 @@ mongoose.connect(process.env.CONNECTION_URL).then(() => {
 }).catch((err) => {
     console.log(err)
 })
+
+
 app.use(routes)
 app.use(usercontroller)
 app.use(assignmentcontroller)

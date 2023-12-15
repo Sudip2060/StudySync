@@ -1,3 +1,32 @@
+window.addEventListener('load', async () => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const encodedSectionName = urlParams.get('sectionname');
+    document.querySelector('.Assignment-left-header').textContent = encodedSectionName
+    try {
+        const res = await fetch('/assignments/data?sectionname=' + encodedSectionName, {
+            method: 'get',
+            headers: { 'content-type': 'application/json' }
+        })
+        if (res.ok) {
+            const retrievedassignments = await res.json()
+            retrievedassignments.forEach(assignment => {
+                let assignmentTitle = assignment.assignmentname
+                let startdate = new Date(assignment.startdate)
+                let formattedstartdate = dateformatter(startdate)
+                let enddate = new Date(assignment.enddate)
+                let formattedenddate = dateformatter(enddate)
+                addassignmentbar(assignmentTitle, formattedstartdate, formattedenddate)
+            });
+        }
+        else {
+            console.log('no data found')
+        }
+    }
+    catch (err) {
+        console.log(err.message)
+    }
+})
 
 let overlaycreatebutton = document.getElementById('createbutton')
 if (overlaycreatebutton) {
@@ -7,11 +36,12 @@ if (overlaycreatebutton) {
     }
 }
 
-
-function hideOverlay() {
-    document.getElementById("overlay").style.display = "none";
+let overlayclosebutton = document.querySelector('.close-btn')
+if (overlayclosebutton) {
+    overlayclosebutton.addEventListener('click', () => {
+        document.getElementById("overlay").style.display = "none";
+    })
 }
-
 
 let addassignmentbutton = document.getElementById('assignmentaddbutton')
 if (addassignmentbutton) {
@@ -29,9 +59,7 @@ if (addassignmentbutton) {
             alert('Start date must be before the end date.');
             return;
         }
-
         postassignment();
-        addassignmentbar(assignmentName, startDate, endDate)
         document.getElementById('sectionname').value = '';
         document.getElementById('startdate').value = '';
         document.getElementById('enddate').value = '';
@@ -45,27 +73,42 @@ async function postassignment() {
     const startdate = document.getElementById('startdate').value;
     const enddate = document.getElementById('enddate').value;
     const instructions = document.getElementById('instructions').value;
+    const section = document.querySelector('.Assignment-left-header').textContent
     try {
         const res = await fetch('/assignments/new', {
             method: 'post',
-            body: JSON.stringify({ assignmentname, startdate, enddate, instructions }),
+            body: JSON.stringify({ section, assignmentname, startdate, enddate, instructions }),
             headers: { 'Content-type': 'application/json' }
         })
 
         if (res.ok) {
             const data = await res.json()
-            console.log(data)
-            document.querySelector('.message-box').textContent = JSON.stringify(assignmentname) + ' sucessfully added '
+            displaymessage('Sucessfully created '+ assignmentname)
+            addassignmentbar(assignmentname, startdate, enddate)
+            clearform()
         }
         else {
-            const err = await res.json()
-            console.log(err)
+            const error = await res.json()
+            displaymessage(error.message)
+        }
+        function clearform() {
+            document.getElementById('sectionname').value = '';
+            document.getElementById('startdate').value = '';
+            document.getElementById('enddate').value = '';
+            document.getElementById('instructions').value = '';
+        }
+
+        function displaymessage(message){
+            let messagebox = document.querySelector('.message-box')
+            messagebox.textContent = message
+            setTimeout(() => {
+                messagebox.textContent=''
+            }, 1200);
         }
     }
-    catch (error) {
-        console.log(error)
+    catch (err) {
+        console.log(err)
     }
-
 }
 
 function addassignmentbar(assignmentname, sDate, edate) {
@@ -157,8 +200,9 @@ function preview() {
 }
 
 async function viewassignment(assignmentname) {
+    let sectionname = document.querySelector('.Assignment-left-header').textContent
     try {
-        const res = await fetch('/assignments/name?name=' + assignmentname, {
+        const res = await fetch('/assignments/name?name=' + assignmentname + '&section=' + sectionname, {
             method: "get",
             headers: {
                 'Content-type': 'application/json'
@@ -181,8 +225,8 @@ async function viewassignment(assignmentname) {
             const Startdate = new Date(data.assignment.startdate)
             const Enddate = new Date(data.assignment.enddate)
 
-            document.querySelector('.PreviewAssignmentstartdate').textContent = 'Start Date: ' + dateformatter(Startdate)
-            document.querySelector('.PreviewAssignmentenddate').textContent = 'End Date: ' + dateformatter(Enddate)
+            document.querySelector('.PreviewAssignmentstartdate').textContent = 'Start Date: ' + (Startdate)
+            document.querySelector('.PreviewAssignmentenddate').textContent = 'End Date: ' + (Enddate)
             document.querySelector('.instructionsBody').textContent = data.assignment.instructions
         }
         else {
@@ -232,8 +276,9 @@ function createdeleteeditbutton() {
     if (assignmenteditbutton) {
         assignmenteditbutton.onclick = () => {
             let assignmentBar = document.querySelector('#clickeddiv')
-            let assignmenttitle= assignmentBar.querySelector('#assignmenttitle').textContent
-            let url = '/editassignment?assignmentname='+encodeURIComponent(assignmenttitle)
+            let assignmenttitle = assignmentBar.querySelector('#assignmenttitle').textContent
+            let sectionname = document.querySelector('.Assignment-left-header').textContent
+            let url = '/editassignment?assignmentname=' + encodeURIComponent(assignmenttitle) + '&section=' + sectionname
             window.location.href = url
         }
     }
@@ -273,33 +318,8 @@ function removebuttonsandpreview() {
     buttoncontainers.removeChild(oldeditbutton)
 }
 
-window.addEventListener('load', async () => {
-    try {
-        const res = await fetch('/assignments/data', {
-            method: 'get',
-            headers: { 'content-type': 'application/json' }
-        })
-        if (res.ok) {
-            const retrievedassignments = await res.json()
-            retrievedassignments.forEach(assignment => {
-                let assignmentTitle = assignment.assignmentname
-                let startdate = new Date(assignment.startdate)
-                let formattedstartdate = dateformatter(startdate)
-                let enddate = new Date(assignment.enddate)
-                let formattedenddate = dateformatter(enddate)
-                addassignmentbar(assignmentTitle, formattedstartdate, formattedenddate)
-            });
-        }
-        else {
-            console.log('no data found')
-        }
-    }
-    catch (err) {
-        console.log(err.message)
-    }
-})
 
-module.exports = dateformatter
+
 
 
 

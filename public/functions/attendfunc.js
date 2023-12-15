@@ -34,12 +34,13 @@ async function getstudentlist(section) {
             headers: { 'content-type': 'application/json' }
         })
         if (res.ok) {
-            console.clear()
+
             const data = await res.json()
             document.querySelector('.head-header').textContent = 'Attendance-' + section
             data.forEach(student => {
                 liststudentdetails(student)
-                console.log(student)
+
+
             });
         }
         else {
@@ -98,20 +99,27 @@ function liststudentdetails(student) {
 }
 
 
-
 let savebuttonadded = false
 function showsavebutton() {
     if (!savebuttonadded) {
+        let savebuttonholder = document.createElement('div')
+        savebuttonholder.setAttribute('class','savebutton-holder')
+        
         let savebutton = document.createElement('button')
         savebutton.setAttribute('class', 'attendancesavebutton')
         savebutton.textContent = 'Save'
-        document.querySelector('.right').appendChild(savebutton)
-        savebutton.addEventListener('click', updateassignment)
+        savebuttonholder.appendChild(savebutton)
+        
+        document.querySelector('.right').appendChild(savebuttonholder)
+        savebutton.addEventListener('click', updateattendance)
+}
+
+
     }
     return savebuttonadded = true
 }
 
-function updateassignment() {
+function updateattendance() {
     let week = document.querySelector('.week-select-button').value
     let section = document.querySelector('.head-header').textContent;
     let sectionname = section.match(/section \d+/);
@@ -120,12 +128,12 @@ function updateassignment() {
     databars.forEach(bar => {
         let studentid = bar.querySelector('.stuid').textContent
         let status = bar.querySelector('.attendancebutton').value
-        updateassignmentrecord(sectionname, studentid, week, status)
-
+        updateattendancerecord(sectionname, studentid, week, status)
     });
+    updatedattendancemessage()
 }
 
-async function updateassignmentrecord(studentsection, studentid, week, status) {
+async function updateattendancerecord(studentsection, studentid, week, status) {
     try {
         const res = await fetch('/attendancedata', {
             method: 'put',
@@ -144,6 +152,27 @@ async function updateassignmentrecord(studentsection, studentid, week, status) {
         console.log(err.message)
     }
 }
+
+
+function updatedattendancemessage(){
+    let updatemessagebox = document.querySelector('.attendanceupdatemessagebox')
+    updatemessagebox.textContent = "Updated Sucessfully"
+
+    setTimeout(() => {
+        updatemessagebox.textContent = ''
+    }, 1000);
+
+    let attendancesavebuttonholder = document.querySelector('.savebutton-holder')
+    if(attendancesavebuttonholder){
+        document.querySelector('.right').removeChild(attendancesavebuttonholder)
+        savebuttonadded = false
+    }
+}
+
+
+
+
+
 
 
 

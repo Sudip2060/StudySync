@@ -1,7 +1,10 @@
 const mongoose = require('mongoose')
 const assignmentschema = new mongoose.Schema({
-    userid:{
-        type : String
+    userid: {
+        type: String
+    },
+    section: {
+        type: String
     },
     assignmentname: {
         type: String
@@ -17,6 +20,6 @@ const assignmentschema = new mongoose.Schema({
     }
 })
 
-const Assignment = mongoose.model('assignment',assignmentschema);
+const Assignment = mongoose.model('assignment', assignmentschema);
 
 module.exports = Assignment;

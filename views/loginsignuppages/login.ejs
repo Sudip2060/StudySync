@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" href="/others/snuplgnstyles.css">
+    <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
+</head>
+<body>
+    <div class="login-top">
+        <div id="logo-div">
+            <img src="/images/logo.png" class="logo-img">
+        </div>
+        <div id="signup-div">
+            <button type="button" id="signup-button">Sign up</button>
+        </div>
+    </div>
+    <div class="login-header">
+        <h1>login</h1>
+    </div>
+    <div class="login-form">
+        <form>
+            <div class="form-row">
+                <input type="email" class="username-box" placeholder="username">
+            </div>
+            <div class="form-row">
+                <input type="password" class="password-box" placeholder="password">
+            </div>
+            <div class="form-row">
+                <button type="button" id="signin-button">Sign in</button>
+            </div>
+        </form>
+    </div>
+    <div class="login-error">
+    </div>
+    <footer>
+        <P>Copyright &copy; 2023 StudySync. All rights reserved.</P>
+    </footer>
+</body>
+</html>
+<script>
+    document.getElementById('signup-button').onclick = function () {
+        window.location.href = '/signup'
+    }
+    document.getElementById('signin-button').onclick = async () => {
+        try {
+            const email = document.querySelector('.username-box').value
+            const password = document.querySelector('.password-box').value
+            if (!email || !password) {
+                document.querySelector('.login-error').textContent = 'Both username and password are required!';
+                return;
+            }
+            function isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+            if (!isValidEmail(email)) {
+                document.querySelector('.login-error').textContent = 'Please enter a valid email address.';
+                return;
+            }
+            const res = await fetch('/login', {
+                method: 'post',
+                body: JSON.stringify({ email, password }),
+                headers: { 'Content-type': 'application/json' }
+            }
+            )
+            if (res.ok) {
+                window.location.href = '/'
+            }
+            else {
+                const errordata = await res.json()
+                showmessage(errordata)
+            }
+            function showmessage(message) {
+                let messagebox = document.querySelector('.login-error')
+                messagebox.textContent = message
+                setTimeout(() => {
+                    messagebox.textContent = ''
+                }, 1500);
+            }
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }
+</script>

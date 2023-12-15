@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const User = require('../models/schema')
+const User = require('../models/userschema')
 const { createtoken } = require('../Necessities/utilities')
 require('dotenv').config()
 const jwt = require('jsonwebtoken')
@@ -9,10 +9,17 @@ const jwt = require('jsonwebtoken')
 router.post('/signup', async (req, res) => {
     try {
         const { firstname, lastname, dateofbirth, institution, phonenumber, postalcode, email, password } = req.body
-        const user = await User.create({ firstname, lastname, dateofbirth, institution, phonenumber, postalcode, email, password })
-        const token = createtoken(user._id)
-        res.cookie('jwt', token, { httpOnly: true, maxAge: 60 * 60 * 1000 })
-        res.status(200).json({ user })
+        const existinguser = await User.findOne({ email })
+        if (existinguser) {
+            res.status(400).json({ message: "User with that email address already registered" })
+        }
+        else {
+            const user = await User.create({ firstname, lastname, dateofbirth, institution, phonenumber, postalcode, email, password })
+            const token = createtoken(user._id)
+            res.cookie('jwt', token, { httpOnly: true, maxAge: 60 * 60 * 1000 })
+            res.status(200).json({ user })
+        }
+
     }
     catch (err) {
         res.status(500).json("Error")
@@ -38,12 +45,12 @@ router.put('/updateaccount', async (req, res) => {
     try {
         const { email, phonenumber, postalcode } = req.body
         const token = req.cookies.jwt
-        const decodedtoken = jwt.verify(token,process.env.JWT_SECRET);
+        const decodedtoken = jwt.verify(token, process.env.JWT_SECRET);
         const userid = decodedtoken.id
-        const updateduser = await User.findByIdAndUpdate(userid,{
-            email:email,
-            phonenumber:phonenumber,
-            postalcode:postalcode
+        const updateduser = await User.findByIdAndUpdate(userid, {
+            email: email,
+            phonenumber: phonenumber,
+            postalcode: postalcode
         })
         if (updateduser) {
             res.status(201).json({ message: "user updated sucessfully" })
@@ -79,7 +86,7 @@ router.get('/userdetails', async (req, res) => {
     try {
         const token = req.cookies.jwt
         if (token) {
-            const decodedtoken = jwt.verify(token,process.env.JWT_SECRET);
+            const decodedtoken = jwt.verify(token, process.env.JWT_SECRET);
             const userid = decodedtoken.id
             const user = await User.findById(userid)
             res.status(200).json(user)
@@ -96,15 +103,15 @@ router.post('/passwordchange', async (req, res) => {
     try {
         const { email, oldpassword, newpassword } = req.body;
         const user = await User.updatepassword(email, oldpassword, newpassword)
-        if(user){
+        if (user) {
             res.status(200).json("Password Changed Sucessfully")
         }
-        else{
-            res.status(404).json({message:"an error "})
+        else {
+            res.status(404).json({ message: "an error " })
         }
     }
     catch (err) {
-        res.status(500).json(err.message ) 
+        res.status(500).json(err.message)
     }
 })
 //request for updating the account settings
@@ -112,12 +119,12 @@ router.put('/updateaccount', async (req, res) => {
     try {
         const { email, phonenumber, postalcode } = req.body
         const token = req.cookies.jwt
-        const decodedtoken = jwt.verify(token,process.env.JWT_SECRET);
+        const decodedtoken = jwt.verify(token, process.env.JWT_SECRET);
         const userid = decodedtoken.id
-        const updateduser = await User.findByIdAndUpdate(userid,{
-            email:email,
-            phonenumber:phonenumber,
-            postalcode:postalcode
+        const updateduser = await User.findByIdAndUpdate(userid, {
+            email: email,
+            phonenumber: phonenumber,
+            postalcode: postalcode
         })
         if (updateduser) {
             res.status(201).json({ message: "user updated sucessfully" })

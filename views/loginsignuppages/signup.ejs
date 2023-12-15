@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signup</title>
+    <link rel="stylesheet" href="/others/snuplgnstyles.css">
+    <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
+</head>
+<body>
+    <div id="left-side">
+        <div id="logo-div">
+            <img src="/images/logo.png" class="logo-img">
+        </div>
+        <div class="welcome-message">
+            <P>Connect and Conquer: Sign In for a New Experience.</P>
+        </div>
+        <div class="remindermessage">
+            <P class="CTA">Already have an account?</P>
+            <p id="sign-inmessage">Login</p>
+        </div>
+    </div>
+    <div id="right-side">
+        <div class="signup-head">
+            <h2>Create an Account</h2>
+        </div>
+        <div class="form-part">
+            <form>
+                <div class="signup-form-row">
+                    <div class="signup-firstname">
+                        <div class="form-label">
+                            <label for="firstname">First name</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="text" id="firstname" required>
+                        </div>
+                    </div>
+                    <div class="signup-lastname">
+                        <div class="form-label">
+                            <label for="lastname">Last name</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="text" id="lastname">
+                        </div>
+                    </div>
+                </div>
+                <div class="signup-form-row">
+                    <div class="signup-DOB">
+                        <div class="form-label">
+                            <label for="DOB">Date of birth</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="date" id="DOB">
+                        </div>
+                    </div>
+                    <div class="signup-institution">
+                        <div class="form-label">
+                            <label for="institution">Institution</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="text" id="Institution">
+                        </div>
+                    </div>
+                </div>
+                <div class="signup-form-row">
+                    <div class="signup-phone-no">
+                        <div class="form-label">
+                            <label for="phone-no">Phone number</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="tel" id="phone-no" minlength="10" maxlength="10" placeholder="1234567890">
+                        </div>
+                    </div>
+                    <div class="signup-postal">
+                        <div class="form-label">
+                            <label for="postal">Postal code</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="text" id="postal">
+                        </div>
+                    </div>
+                </div>
+                <div class="signup-form-row">
+                    <div class="signup-email">
+                        <div class="form-label">
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="email" id="email">
+                        </div>
+                    </div>
+                </div>
+                <div class="signup-form-row">
+                    <div class="signup-password">
+                        <div class="form-label">
+                            <label for="password">Password</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="password" id="password">
+                        </div>
+                    </div>
+                    <div class="signup-confirm-password">
+                        <div class="form-label">
+                            <label for="confirm-password">Confirm your Password</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="password" id="confirm-password">
+                        </div>
+                    </div>
+                </div>
+                <div class="signup-submit">
+                    <button type="button" id="signup-submit-button">Register</button>
+                </div>
+                <div id="signuperr">
+                </div>
+
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    let login_message = document.getElementById('sign-inmessage')
+    login_message.onclick = function () {
+        window.location.href = '/login'
+    }
+    let signup_button = document.getElementById('signup-submit-button')
+    signup_button.onclick = async function () {
+        let firstname = document.getElementById('firstname').value;
+        let lastname = document.getElementById('lastname').value;
+        let dateofbirth = document.getElementById('DOB').value;
+        let institution = document.getElementById('Institution').value;
+        let phonenumber = document.getElementById('phone-no').value;
+        let postalcode = document.getElementById('postal').value;
+        let email = document.getElementById('email').value;
+        let password = document.getElementById('password').value;
+        let confirmpassword = document.getElementById('confirm-password').value;
+        function validateForm() {
+            if (!(firstname && lastname && dateofbirth && institution && phonenumber && postalcode && email && password && confirmpassword)) {
+                let message = 'Fill the form details completely';
+                showsignupmessage(message)
+                return false;
+            }
+            if (password !== confirmpassword) {
+                let message = 'Passwords do not match';
+                showsignupmessage(message)
+                return false;
+            }
+            if (/[a-zA-Z]/.test(phonenumber)) {
+                let message = 'Phone number should not contain alphabets';
+                showsignupmessage(message)
+                return false;
+            }
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                let message = 'Invalid email address format';
+                showsignupmessage(message);
+                return false;
+            }
+            return true;
+        }
+        if (validateForm()) {
+            async function register() {
+                try {
+                    const res = await fetch('/signup', {
+                        method: 'post',
+                        body: JSON.stringify({ firstname, lastname, dateofbirth, institution, phonenumber, postalcode, email, password }),
+                        headers: { 'Content-type': 'application/json' }
+                    })
+                    if (res.ok) {
+                        let sucessfulmessage = 'Registration Successful'
+                        document.getElementById('signuperr').style.color = '#008000'
+                        showsignupmessage(sucessfulmessage)
+                        document.querySelector('form').reset()
+                    }
+                    else {
+                        const error = await res.json()
+                        let unsucessfulmessage = error.message
+                        showsignupmessage(unsucessfulmessage)
+                    }
+                }
+                catch (err) {
+                    console.error("following the error details")
+                    console.dir(err)
+                }
+            }
+            register()
+            
+        }
+        function showsignupmessage(message) {
+            let signupmessagebox = document.getElementById('signuperr')
+            signupmessagebox.textContent = message
+            setTimeout(() => {
+                signupmessagebox.textContent = ''
+            }, 1200)
+        }
+    }
+</script>

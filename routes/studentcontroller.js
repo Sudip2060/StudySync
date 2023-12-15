@@ -1,6 +1,9 @@
 const express = require('express')
 const Router = express('Router')
-const Student = require('../models/studentschema')
+
+const Student = require('../models/Studentschema')
+
+
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
@@ -53,7 +56,7 @@ Router.get('/students', async (req, res) => {
     }
 })
 
-
+//
 Router.put('/attendancedata', async (req, res) => {
     try {
         const { studentsection, studentid, week, status } = req.body;
@@ -98,6 +101,7 @@ Router.put('/attendancedata', async (req, res) => {
                 { new: true, upsert: true }
             );
             res.status(200).json(updatedData);
+
         }
     }
     catch (err) {
@@ -106,41 +110,6 @@ Router.put('/attendancedata', async (req, res) => {
 })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Router.post('/students', async (req, res) => {
-    try {
-        const { studentid, studentname, studentgender, studentemail, studentsection } = req.body
-        const newstudent = await Student.create({ studentid, studentemail, studentgender, studentname, studentsection })
-        if (newstudent) {
-            res.status(200).json(newstudent)
-        }
-        else {
-            res.status(404).json({ message: 'an error occured' })
-        }
-    }
-    catch (err) {
-        res.status(500).json(err.message)
-        console.log(err.message)
-
-    }
-})
 
 
 
@@ -176,8 +145,6 @@ Router.post('/morestudents', async (req, res) => {
 
     }
 })
-
-
 
 
 
