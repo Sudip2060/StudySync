@@ -189,7 +189,6 @@ nav a:active::after {
 .studentcount,
 .sectioncount {
     font-family: 'JetBrains Mono';
-
     font-weight: 700;
     font-size: 15px;
     align-items: center;
