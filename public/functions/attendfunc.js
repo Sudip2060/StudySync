@@ -6,6 +6,7 @@ if (sectionbuttoncontainer) {
         let sectionname = selectedbutton.querySelector('.sectionbutton-label').textContent
         clearcontent()
         getstudentlist(sectionname)
+
     })
 }
 
@@ -36,11 +37,14 @@ async function getstudentlist(section) {
             headers: { 'content-type': 'application/json' }
         })
         if (res.ok) {
+
             const data = await res.json()
             document.querySelector('.head-header').textContent = 'Attendance-' + section
             document.querySelector('.attendanceupdatemessagebox').textContent = ''
             data.forEach(student => {
                 liststudentdetails(student)
+
+
             });
         }
         else {
@@ -100,6 +104,7 @@ function liststudentdetails(student) {
 }
 
 //function to add a save button whenever the select option of student attendance is changed
+
 let savebuttonadded = false
 function showsavebutton() {
     if (!savebuttonadded) {
@@ -113,6 +118,9 @@ function showsavebutton() {
 
         document.querySelector('.right').appendChild(savebuttonholder)
         savebutton.addEventListener('click', updateattendance)
+}
+
+
     }
     return savebuttonadded = true
 }
@@ -169,6 +177,13 @@ function updatedattendancemessage() {
         savebuttonadded = false
     }
 }
+
+
+
+
+
+
+
 
 
 
