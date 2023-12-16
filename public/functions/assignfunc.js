@@ -1,3 +1,4 @@
+/*retrieves the list of assignment based on the section and passes onto addassignmentbar function to display it in front end */
 window.addEventListener('load', async () => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -28,6 +29,7 @@ window.addEventListener('load', async () => {
     }
 })
 
+//Button to show and close the overlay that contains a form to add assignment
 let overlaycreatebutton = document.getElementById('createbutton')
 if (overlaycreatebutton) {
     overlaycreatebutton.onclick = function showOverlay() {
@@ -43,6 +45,7 @@ if (overlayclosebutton) {
     })
 }
 
+/*before posting the assignment in the database, A checker that will check if the necessary details has been entered*/
 let addassignmentbutton = document.getElementById('assignmentaddbutton')
 if (addassignmentbutton) {
     addassignmentbutton.onclick = () => {
@@ -60,14 +63,12 @@ if (addassignmentbutton) {
             return;
         }
         postassignment();
-        document.getElementById('sectionname').value = '';
-        document.getElementById('startdate').value = '';
-        document.getElementById('enddate').value = '';
-        document.getElementById('instructions').value = '';
 
     };
 }
 
+
+/* Invokes a post method to add assignment in the database with section name and other assignment details*/
 async function postassignment() {
     const assignmentname = document.getElementById('sectionname').value;
     const startdate = document.getElementById('startdate').value;
@@ -111,6 +112,8 @@ async function postassignment() {
     }
 }
 
+
+/*Creates a assignment bar with the details passed whenever a assignment is sucessfully posted into the database*/
 function addassignmentbar(assignmentname, sDate, edate) {
     const newAssignmentBox = document.createElement('div');
     newAssignmentBox.className = 'assignment-box';
@@ -142,7 +145,7 @@ function addassignmentbar(assignmentname, sDate, edate) {
     document.querySelector('.left-main').appendChild(newAssignmentBox);
 }
 
-
+//for each assignment bar it invokes the view assignment function
 let mainleftdiv = document.querySelector('.left-main')
 if (mainleftdiv) {
     mainleftdiv.addEventListener('click', function (event) {
@@ -159,6 +162,7 @@ if (mainleftdiv) {
 }
 
 
+/*a function to create all the necessary elements to hold the assignment details during the preview in the ride side of screen*/
 function preview() {
     let mainpreview = document.createElement('div')
     mainpreview.setAttribute('class', 'right-bodycontainer')
@@ -199,6 +203,8 @@ function preview() {
     instructionscontainer.appendChild(instructionsBody)
 }
 
+
+//Retrieves assignment data from the database based on the section and assignment name passed in the query
 async function viewassignment(assignmentname) {
     let sectionname = document.querySelector('.Assignment-left-header').textContent
     try {
@@ -239,11 +245,14 @@ async function viewassignment(assignmentname) {
     }
 
 }
+
+//a Function to format the date
 function dateformatter(date) {
     let dateformat = { year: 'numeric', month: 'numeric', day: 'numeric' }
     return date.toLocaleDateString('en-us', dateformat)
 }
 
+//function that creates delete and edit button 
 function createdeleteeditbutton() {
     let previouseditbutton = document.querySelector('editbutton-holder')
     let previousdeletebutton = document.querySelector('.deletebutton-holder')
@@ -283,6 +292,8 @@ function createdeleteeditbutton() {
         }
     }
 }
+
+// function to delete assignment that will fetch delete request
 async function deleteassignment() {
     try {
         let clickeddiv = document.getElementById('clickeddiv')
@@ -305,6 +316,8 @@ async function deleteassignment() {
         console.log(err)
     }
 }
+
+// A function to remove the delete and edit button whenever the preview is removed
 function removebuttonsandpreview() {
     let bar_container = document.querySelector('.left-main')
     bar_container.removeChild(clickeddiv)

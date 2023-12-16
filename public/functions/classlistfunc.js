@@ -1,4 +1,4 @@
-
+//for each section invokes the showstudentdata function by passing the section name
 let sectionsbuttoncontainer = document.querySelector('.sections-button-container')
 if(sectionsbuttoncontainer){
     sectionsbuttoncontainer.addEventListener('click',(event)=>{
@@ -10,6 +10,7 @@ if(sectionsbuttoncontainer){
     })
 }   
 
+//clears the content where the student data will be placed
 function clearcontent(){
     let datacontent = document.querySelector('.middle-main')
     let databars = datacontent.querySelectorAll('.classlistrow')
@@ -18,6 +19,7 @@ function clearcontent(){
     });
 }
 
+//retrieves student data from the database based on the section name passed
 async function showstudentdata(section){
     try{
         const res = await fetch('/students?section=' + section,{
@@ -42,7 +44,7 @@ async function showstudentdata(section){
     }
 }
 
-
+// creates a row to place student details 
 function addclasslistrows(student){
     let emptymessage = document.querySelector('.emptyclasslistmessage')
     emptymessage.style.display = 'none'
@@ -91,18 +93,6 @@ function addclasslistrows(student){
 
 }
 
-let barscontainer = document.querySelector('.middle-main')
-barscontainer.addEventListener('click',(event)=>{
-    let databar = event.target.closest('.classlistrow')
-    let colored = databar.classList.contains('colored')
-    if(colored){
-        databar.style.backgroundColor = ''
-    }
-    else{
-        databar.style.backgroundColor = 'aqua'
-    }
-    databar.classList.toggle('colored')
-})
 
 let email_button =document.querySelector('.email-button')
 if(email_button){

@@ -1,3 +1,4 @@
+//functions to change the page as per the click in different buttons
 document.querySelector('.dashboard-button').addEventListener('click', () => {
     window.location.href = '/profile'
 })
@@ -14,7 +15,7 @@ document.querySelector('.stayback').onclick = () => {
     document.querySelector('.overlay').style.display = 'none'
 }
 
-
+//Logout function which is invoked whenever the logout button in the overlay is clicked
 const logoutbutton = document.querySelector('.logout')
 if(logoutbutton){
 logoutbutton.addEventListener('click', async () => {
@@ -39,6 +40,7 @@ logoutbutton.addEventListener('click', async () => {
 })
 }
 
+
 const passwordchangebutton = document.querySelector('.savebutton')
 if (passwordchangebutton) {
     passwordchangebutton.addEventListener('click', async () => {
@@ -47,7 +49,7 @@ if (passwordchangebutton) {
             const oldpassword = document.querySelector('.cpcurrentpassword').value
             const newpassword = document.querySelector('.cpnewpassword').value
             const confirmnewpassword = document.querySelector('.cpconfirmpassword').value
-
+            //small form validation before sending the post request to update the password
             if (!email || !oldpassword || !newpassword || !confirmnewpassword) {
                 let message = 'Please fill all of the details'
                 let time = 1000
@@ -61,9 +63,8 @@ if (passwordchangebutton) {
                 displaymessage(message, time)
                 return;
             }
-
             const res = await fetch('/passwordchange', {
-                method: 'post',
+                method: 'put',
                 body: JSON.stringify({ email, oldpassword, newpassword }),
                 headers: {
                     'content-type': 'application/json'
@@ -85,7 +86,7 @@ if (passwordchangebutton) {
                 let time = 1000
                 displaymessage(message, time)
             }
-
+            //function to display the message for in accordance to the time and message parameter passed
             function displaymessage(message, time) {
                 let messagebox = document.querySelector('.messagebox')
                 messagebox.style.color = '#ff0000'
@@ -101,6 +102,7 @@ if (passwordchangebutton) {
     })
 }
 
+// retrieves the data of the user when ever the profile page is loaded
 window.addEventListener('load', async () => {
     try {
         const res = await fetch('/userdetails', {
@@ -154,6 +156,8 @@ window.addEventListener('load', async () => {
     }
 })
 
+
+//sends a put request to update the account details
 const AS_savebutton = document.querySelector('.AS-savebutton')
 if(AS_savebutton){
 AS_savebutton.addEventListener('click', async () => {

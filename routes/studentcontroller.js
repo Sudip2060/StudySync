@@ -52,7 +52,8 @@ Router.get('/students', async (req, res) => {
         console.log(err.message)
     }
 })
-//
+
+/*A put request which will check if the student has the week and status. If there exists a week and it status then it will update the status if not then it will create a new attendance status*/
 Router.put('/attendancedata', async (req, res) => {
     try {
         const { studentsection, studentid, week, status } = req.body;
@@ -110,42 +111,9 @@ Router.put('/attendancedata', async (req, res) => {
 
 
 
-Router.post('/morestudents', async (req, res) => {
-    try {
-        const studentdata = req.body
-        const createdstudents = []
-        for (const student of studentdata) {
-            const { studentid, studentname, studentgender, studentemail, studentsection } = student
-            const newstudent = await Student.create({ studentid, studentname, studentgender, studentemail, studentsection })
-            createdstudents.push(newstudent)
-        }
-        if (createdstudents.length > 0) {
-            res.status(200).json(createdstudents)
-        }
-        else {
-            res.status(404).json({ message: "no data found" })
-        }
-    }
-    catch (err) {
-        res.status(500).json(err.message)
-        console.log(err.message)
-
-    }
-})
 
 
 
-Router.delete('/students', async (req, res) => {
-    try {
-        const deletedstudents = await Student.deleteMany()
-        if (deletedstudents) {
-            res.status(200).json({ message: 'All Students deleted' })
-        }
-    }
-    catch (err) {
-
-    }
-})
 
 
 

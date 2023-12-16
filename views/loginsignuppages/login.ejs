@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="/others/snuplgnstyles.css">
     <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
 </head>
+
 <body>
     <div class="login-top">
         <div id="logo-div">
@@ -38,12 +40,13 @@
         <P>Copyright &copy; 2023 StudySync. All rights reserved.</P>
     </footer>
 </body>
+
 </html>
 <script>
-    document.getElementById('signup-button').onclick = function () {
+    document.getElementById('signup-button').addEventListener('click', () => {
         window.location.href = '/signup'
-    }
-    document.getElementById('signin-button').onclick = async () => {
+    })
+    document.getElementById('signin-button').addEventListener('click', async () => {
         try {
             const email = document.querySelector('.username-box').value
             const password = document.querySelector('.password-box').value
@@ -70,8 +73,10 @@
             }
             else {
                 const errordata = await res.json()
-                showmessage(errordata)
+                showmessage(errordata.message)
             }
+
+            //function to show message for a short period of time only
             function showmessage(message) {
                 let messagebox = document.querySelector('.login-error')
                 messagebox.textContent = message
@@ -83,5 +88,5 @@
         catch (err) {
             console.log(err)
         }
-    }
+    })
 </script>
