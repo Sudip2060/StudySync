@@ -1,0 +1,247 @@
+body {
+    position: relative;
+    background: #FFFFFF;
+    width: 980px;
+    margin: auto;
+    font-family: "JetBrains Mono";
+    background: linear-gradient(302.64deg, #AAF2A8 20.29%, rgba(170, 242, 168, 0.973958) 21.61%, rgba(170, 242, 168, 0) 70.54%);
+
+}
+
+.logo-img {
+    width: 181px;
+    height: 166px;
+    left: 110px;
+    top: 37px;
+    background: url(/images/logo.png) center/cover;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.navbar {
+    height: 32px;
+    margin-top: 90px;
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px;
+    align-items: center;
+    text-align: center;
+    width: 50%;
+    color: #000000;
+
+
+}
+
+nav {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+nav a {
+    text-decoration: none;
+    color: #000000;
+    font-weight: 650;
+    display: inline-block;
+    position: relative;
+    text-shadow: 10px;
+
+}
+
+nav a::after {
+    content: "";
+    display: block;
+    height: 2px;
+    width: 0;
+    background-color: #096A2E;
+    position: absolute;
+    left: 0;
+    transition: width 0.3s ease;
+    bottom: 3px;
+}
+
+nav a:hover::after {
+    width: 100%;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.8);
+}
+
+nav a:active::after {
+    box-shadow: none;
+}
+
+.sectionouterdiv {
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background: #60CA56;
+    border-radius: 60px;
+    width: 80%;
+    margin: auto;
+}
+
+.sectioninnerdiv {
+    box-sizing: border-box;
+    width: 100%;
+    height: 420px;
+    top: 206px;
+    background: #B2DBC0;
+    border: 1px solid #000000;
+    border-radius: 40px;
+    padding: 0px;
+    margin: 0;
+    
+}
+
+.section-heading {
+    margin-top: 2px;
+    height: 35px;
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 42px;
+    align-items: center;
+    text-align: center;
+    color: #000000;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.sectionimgcontainer {
+    margin-top: 22px;
+    box-sizing: border-box;
+    width: 59px;
+    height: 57px;
+    text-align: center;
+    align-items: center;
+    background: #48D8A4;
+    border: 1px solid #000000;
+    border-radius: 20px;
+    padding-top: 7px;
+}
+
+.section-top {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: auto;
+
+}
+
+.sectionimgcontainer img {
+    width: 40px;
+}
+
+.section-main {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 30px;
+    flex-wrap: wrap;
+    min-height: 240px;
+}
+
+.section-head {
+    background: #DDE8EE;
+    border-radius: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    transition: box-shadow 0.5s ease;
+    clear: both;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 85px ;
+    
+}
+
+.section-head:hover {
+    box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+
+}
+
+
+.section-head:active {
+    background-color: rgba(163, 190, 173, 0.8);
+}
+
+
+
+.section-content {
+    width: 120px;
+    height: 80px;
+    background: linear-gradient(188.95deg, #096A2E -28.17%, rgba(9, 106, 46, 0) 133.7%);
+    border: 1px solid #000000;
+    border-radius: 25px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    
+}
+
+.section-label {
+    margin: 0;
+    padding: 0;
+    padding: none;
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    align-items: center;
+    text-align: center;
+    color: #FFF5F5;
+
+}
+
+.section-label p {
+    margin: 4px;
+}
+
+.content-image img {
+    width: 50px;
+}
+
+.content-image {
+    margin-top: 0;
+}
+
+.section-button {
+    float: right;
+    position: relative;
+    margin-bottom: 18px;
+    margin-right: 10px;
+}
+
+.round-button {
+    font-size: 45px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 49px;
+    height: 49px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.round-button:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
+footer {
+    font-weight: 400;
+    font-size: 12px;
+    align-items: center;
+    text-align: center;
+    font-size: x-small;
+    margin-top: 20px;
+}

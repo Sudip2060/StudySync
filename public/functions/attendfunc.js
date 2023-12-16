@@ -1,4 +1,4 @@
-
+//gets the specific attendace data of the section whenever the respective section is clicked
 let sectionbuttoncontainer = document.querySelector('.sections-button-container')
 if (sectionbuttoncontainer) {
     sectionbuttoncontainer.addEventListener('click', (event) => {
@@ -10,6 +10,7 @@ if (sectionbuttoncontainer) {
     })
 }
 
+//changes gets the attendance data again whenever the week is changed
 let weekselector = document.querySelector('.week-select-button')
 weekselector.addEventListener('change', () => {
     let section = document.querySelector('.head-header').textContent;
@@ -18,7 +19,7 @@ weekselector.addEventListener('change', () => {
     getstudentlist(sectionname)
 })
 
-
+//clears the area in screen where the student details are placed
 function clearcontent() {
     let leftcontent = document.querySelector('.left-main')
     let leftbars = leftcontent.querySelectorAll('.attendancerow')
@@ -27,6 +28,8 @@ function clearcontent() {
     });
 }
 
+/*retrieves the student list form the database based on the section name passed the the parameter 
+for each student retrieved from the database it will invoke the function liststudentdetails passing the data*/
 async function getstudentlist(section) {
     try {
         const res = await fetch('/students?section=' + section, {
@@ -37,6 +40,7 @@ async function getstudentlist(section) {
 
             const data = await res.json()
             document.querySelector('.head-header').textContent = 'Attendance-' + section
+            document.querySelector('.attendanceupdatemessagebox').textContent = ''
             data.forEach(student => {
                 liststudentdetails(student)
 
@@ -52,6 +56,7 @@ async function getstudentlist(section) {
     }
 }
 
+//creates a row to place the student details
 function liststudentdetails(student) {
     let mainleftdiv = document.querySelector('.left-main')
 
@@ -98,18 +103,19 @@ function liststudentdetails(student) {
     attendancebutton.addEventListener('change', showsavebutton)
 }
 
+//function to add a save button whenever the select option of student attendance is changed
 
 let savebuttonadded = false
 function showsavebutton() {
     if (!savebuttonadded) {
         let savebuttonholder = document.createElement('div')
-        savebuttonholder.setAttribute('class','savebutton-holder')
-        
+        savebuttonholder.setAttribute('class', 'savebutton-holder')
+
         let savebutton = document.createElement('button')
         savebutton.setAttribute('class', 'attendancesavebutton')
         savebutton.textContent = 'Save'
         savebuttonholder.appendChild(savebutton)
-        
+
         document.querySelector('.right').appendChild(savebuttonholder)
         savebutton.addEventListener('click', updateattendance)
 }
@@ -119,6 +125,7 @@ function showsavebutton() {
     return savebuttonadded = true
 }
 
+/*a function which retrieved the different values such as week, section student name and student id which will then be passed as parameters to another function called updateattendancerecord()  */ 
 function updateattendance() {
     let week = document.querySelector('.week-select-button').value
     let section = document.querySelector('.head-header').textContent;
@@ -130,9 +137,10 @@ function updateattendance() {
         let status = bar.querySelector('.attendancebutton').value
         updateattendancerecord(sectionname, studentid, week, status)
     });
-    updatedattendancemessage()
 }
 
+
+//fetches a put request passing section ,studentid, week and status in the body
 async function updateattendancerecord(studentsection, studentid, week, status) {
     try {
         const res = await fetch('/attendancedata', {
@@ -142,6 +150,7 @@ async function updateattendancerecord(studentsection, studentid, week, status) {
         })
         if (res.ok) {
             const updateddata = await res.json()
+            updatedattendancemessage()
         }
         else {
             const error = await res.json()
@@ -153,8 +162,8 @@ async function updateattendancerecord(studentsection, studentid, week, status) {
     }
 }
 
-
-function updatedattendancemessage(){
+//Function to show updated message
+function updatedattendancemessage() {
     let updatemessagebox = document.querySelector('.attendanceupdatemessagebox')
     updatemessagebox.textContent = "Updated Sucessfully"
 
@@ -163,7 +172,7 @@ function updatedattendancemessage(){
     }, 1000);
 
     let attendancesavebuttonholder = document.querySelector('.savebutton-holder')
-    if(attendancesavebuttonholder){
+    if (attendancesavebuttonholder) {
         document.querySelector('.right').removeChild(attendancesavebuttonholder)
         savebuttonadded = false
     }

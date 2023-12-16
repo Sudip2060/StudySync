@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="/others/snuplgnstyles.css">
     <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
 </head>
+
 <body>
     <div id="left-side">
         <div id="logo-div">
@@ -113,19 +115,19 @@
                 </div>
                 <div id="signuperr">
                 </div>
-
             </form>
         </div>
     </div>
 </body>
+
 </html>
 <script>
     let login_message = document.getElementById('sign-inmessage')
-    login_message.onclick = function () {
+    login_message.addEventListener('click', () => {
         window.location.href = '/login'
-    }
+    })
     let signup_button = document.getElementById('signup-submit-button')
-    signup_button.onclick = async function () {
+    signup_button.addEventListener('click', async () => {
         let firstname = document.getElementById('firstname').value;
         let lastname = document.getElementById('lastname').value;
         let dateofbirth = document.getElementById('DOB').value;
@@ -180,13 +182,14 @@
                     }
                 }
                 catch (err) {
-                    console.error("following the error details")
                     console.dir(err)
                 }
             }
             register()
-            
+
         }
+
+        //function to show message for a short period of time 
         function showsignupmessage(message) {
             let signupmessagebox = document.getElementById('signuperr')
             signupmessagebox.textContent = message
@@ -194,5 +197,5 @@
                 signupmessagebox.textContent = ''
             }, 1200)
         }
-    }
+    })
 </script>

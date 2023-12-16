@@ -32,7 +32,7 @@ router.post('/assignments/new', async (req, res) => {
 })
 
 
-//get assignments based on the userid
+//get assignments based on the userid and secton id
 router.get('/assignments/data', async (req, res) => {
     try {
         const token = req.cookies.jwt;
@@ -75,26 +75,7 @@ router.get('/assignments/name', async (req, res) => {
     }
 });
 
-
-
-//get assignments
-router.get('/assignmentdatas', async (req, res) => {
-    try {
-        const assignmentdata = await Assignment.find()
-        if (assignmentdata) {
-            res.status(200).json(assignmentdata)
-        }
-        else {
-            res.status(404).json({ message: "no data found" })
-        }
-    }
-    catch (err) {
-        res.status(500).json({ message: "an error occured" })
-        console.error(err)
-    }
-
-})
-
+//update new assignment by id
 router.put('/assignments/update/:id', async (req, res) => {
     try {
         const assignmentid = req.params.id
@@ -115,44 +96,6 @@ router.put('/assignments/update/:id', async (req, res) => {
     }
 })
 
-//delete new assignment by id
-router.delete('/assignments/delete/:id', async (req, res) => {
-    try {
-        const assignmentid = req.params.id
-        const assignmentdata = await Assignment.findByIdAndDelete(assignmentid)
-        if (assignmentdata) {
-            res.status(200).json({ message: 'assignment deleted' })
-        }
-        else {
-            res.status(404).json({ message: 'an error occured while deleting the assignment' })
-        }
-    }
-    catch (err) {
-        res.status(500).json({ message: "an error occured" })
-        console.error(err)
-    }
-})
-
-//update new assignment by id
-router.put('/assignments/update/:id', async (req, res) => {
-    try {
-        const assignmentid = req.params.id
-        const assignmentdata = await Assignment.findByIdAndUpdate(assignmentid)
-        if (assignmentdata) {
-            res.status(200).json({ message: 'assignment updated' })
-        }
-        else {
-            res.status(404).json({ message: "an error occured" })
-        }
-    }
-    catch (err) {
-        res.status(500).json({ message: "an error occured" })
-        console.error(err)
-    }
-})
-
-
-
 //delete assignment by name
 router.delete('/assignments/delete', async (req, res) => {
     try {
@@ -172,43 +115,7 @@ router.delete('/assignments/delete', async (req, res) => {
 })
 
 
-router.put('/assignments/update', async (req, res) => {
-    try {
-        const assignmentname = req.query.name;
-
-        const updatedassignment = await Assignment.findOneAndUpdate({ assignmentname }, { $set: req.body }, { new: true })
-        if (updatedassignment) {
-            res.status(200).json(updatedassignment)
-        }
-        else {
-            res.status(404).json({ message: "assignment not found" })
-        }
-    }
-    catch (err) {
-        res.status(500).json({ message: "an error occured" })
-        console.error(err)
-    }
-})
 
 
-
-
-
-
-/* For Developers Purpose Only*/
-
-//delete all assignments 
-router.delete('/assignments/alldata', async (req, res) => {
-    try {
-        const assignmentdata = await Assignment.deleteMany()
-        if (assignmentdata) {
-            res.status(200).json({ message: "all assignments deleted" })
-        }
-
-    }
-    catch (err) {
-
-    }
-})
 
 module.exports = router
