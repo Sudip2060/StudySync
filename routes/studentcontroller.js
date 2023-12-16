@@ -1,9 +1,6 @@
 const express = require('express')
 const Router = express('Router')
-
 const Student = require('../models/Studentschema')
-
-
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
@@ -57,7 +54,6 @@ Router.get('/students', async (req, res) => {
 })
 
 /*A put request which will check if the student has the week and status. If there exists a week and it status then it will update the status if not then it will create a new attendance status*/
-
 Router.put('/attendancedata', async (req, res) => {
     try {
         const { studentsection, studentid, week, status } = req.body;
@@ -102,13 +98,15 @@ Router.put('/attendancedata', async (req, res) => {
                 { new: true, upsert: true }
             );
             res.status(200).json(updatedData);
-
         }
     }
     catch (err) {
         res.status(500).json(err.message)
     }
 })
+
+
+
 
 
 
